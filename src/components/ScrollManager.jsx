@@ -1,7 +1,6 @@
 import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useEffect } from "react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 export const ScrollManager = (props) => {
@@ -12,7 +11,7 @@ export const ScrollManager = (props) => {
   const isAnimating = useRef(false);
 
   data.fill.classList.add("top-0");
-  data.fill.classList.add("abolute");
+  data.fill.classList.add("absolute");
 
   useEffect(() => {
     gsap.to(data.el, {
