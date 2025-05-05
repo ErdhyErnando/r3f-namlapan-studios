@@ -30,7 +30,7 @@ const NavbarButton = (props) => {
   const { label, onClick } = props;
 
   return (
-    <button onClick={onClick} className="text-2xl font-bold cursor-pointer hover: text-yellow-600 transition-colors">
+    <button onClick={onClick} className="text-2xl font-bold cursor-pointer hover: text-yellow-600 transition-colors font-dm-serif tracking-wide">
       {label}
     </button>
   )

@@ -5,7 +5,8 @@ import { Interface } from './components/Interface';
 import { ScrollManager } from './components/ScrollManager';
 import { Navbar } from './components/Navbar';
 import { useState, useEffect } from 'react';
-import { MotionConfig } from 'motion/react';
+import { MotionConfig } from 'framer-motion';
+import { Cursor } from './components/Cursor';
 
 export default function App() {
   const [section, setSection] = useState(0);
@@ -17,14 +18,14 @@ export default function App() {
 
   return (
     <>
-      <MotionConfig transition={{ type: 'spring', mass: 5, stiffness: 50, damping: 50, restDelta: 0.0001}}>
-        <Canvas shadows camera={{ position: [45, 0, 45], fov: 50 }}>
-
-          <color attach="background" args={["#e9e7ff"]} />
-
+      <MotionConfig transition={{ type: 'spring', mass: 5, stiffness: 500, damping: 50, restDelta: 0.0001 }}>
+        <Canvas shadows camera={{ position: [30, 30, -25], fov: 50 }}>
+          <color attach="background" args={["#fbe7ff"]} />
           <ScrollControls pages={4} damping={0.1}>
             <ScrollManager section={section} onSectionChange={setSection} />
-            <Experience />
+            <Scroll>
+              <Experience section={section} menuOpened={menuOpened} />
+            </Scroll>
             <Scroll html>
               <Interface />
             </Scroll>
@@ -35,7 +36,7 @@ export default function App() {
           menuOpened={menuOpened}
           setMenuOpened={setMenuOpened}
         />
-
+        {/* <Cursor /> */}
       </MotionConfig>
     </>
   );

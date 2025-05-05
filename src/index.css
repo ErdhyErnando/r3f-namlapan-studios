@@ -1,4 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=DM+Serif+Display:ital@0;1&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Trocchi&display=swap&family=Cal+Sans');
 @import "tailwindcss";
+
+@theme {
+  --font-dm-serif: 'DM Serif Display', serif;
+  --font-baskerville: 'Baskervville', serif;
+  --font-pt-serif: 'PT Serif', serif;
+  --font-cal-sans: 'Cal Sans', sans-serif;
+}
 
 #root {
   width: 100vw;
