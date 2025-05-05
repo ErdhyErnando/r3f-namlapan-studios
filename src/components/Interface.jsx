@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Projects from './Projects';
 
 const Section = (props) => {
   const { children, alignItems = 'items-start' } = props
@@ -17,8 +18,8 @@ const Section = (props) => {
 export const Interface = () => {
   return <div className="flex flex-col items-center w-screen">
     <HeroSection />
-    <Section>
-      <h1>Clients</h1>
+    <Section className="bg-gray-950/70 mt-20">
+      <Projects />
     </Section>
     <AboutSection />
     <ContactSection />

@@ -4,7 +4,6 @@ import { useRef, useEffect } from "react";
 import * as THREE from "three";
 import { motion, useMotionValue, animate } from "framer-motion";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Projects } from "./Projects";
 
 export const Experience = (props) => {
   const { section, menuOpened } = props;
@@ -35,7 +34,7 @@ export const Experience = (props) => {
 
   return (
     <>
-      <OrbitControls /> Disable OrbitControls if it interferes with animation
+      {/* <OrbitControls /> Disable OrbitControls if it interferes with animation */}
       <directionalLight
         ref={directionalLightRef}
         position={[1, 2, 3]} intensity={1.5}
@@ -52,10 +51,6 @@ export const Experience = (props) => {
       >
         <NamlapanStudio />
       </motion.group>
-      <Projects
-        basePosition={groupBasePosition}
-        // offsetY={projectsOffsetY} 
-        section={section} />
     </>
   );
 }
