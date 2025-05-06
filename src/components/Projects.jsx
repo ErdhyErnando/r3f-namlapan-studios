@@ -106,31 +106,43 @@ const Projects = () => {
             type: 'image',
             src: 'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
             title: 'Nature Beauty',
-            logo: 'https://via.placeholder.com/50x50?text=Logo1'
+            logo: 'https://via.placeholder.com/50x50?text=Logo1',
+            clientName: 'nature-beauty',
         },
         {
             type: 'image',
             src: 'https://images.pexels.com/photos/2570060/pexels-photo-2570060.jpeg?auto=compress&cs=tinysrgb&w=600',
             title: 'Urban Life',
-            logo: 'https://via.placeholder.com/50x50?text=Logo2'
+            logo: 'https://via.placeholder.com/50x50?text=Logo2',
+            clientName: 'urban-life',
         },
         {
             type: 'video',
             src: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
             title: 'Fun Video',
-            logo: 'https://via.placeholder.com/50x50?text=Logo3'
+            logo: 'https://via.placeholder.com/50x50?text=Logo3',
+            clientName: 'fun-video',
         },
         {
             type: 'image',
             src: 'https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=600',
             title: 'Delicious Food',
-            logo: 'https://via.placeholder.com/50x50?text=Logo4'
+            logo: 'https://via.placeholder.com/50x50?text=Logo4',
+            clientName: 'delicious-food',
         },
         {
             type: 'image',
             src: 'https://images.pexels.com/photos/31831861/pexels-photo-31831861/free-photo-of-lone-hiker-on-cliff-at-sunrise-in-mountain-range.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
             title: 'Travel Adventure',
-            logo: 'https://via.placeholder.com/50x50?text=Logo5'
+            logo: 'https://via.placeholder.com/50x50?text=Logo5',
+            clientName: 'travel-adventure',
+        },
+        {
+            type: 'image',
+            src: 'https://pub-e54c94b2502642d69cab5d6cd5d70cee.r2.dev/luffy-1.png',
+            title: 'Luffy',
+            logo: 'https://via.placeholder.com/50x50?text=Logo6',
+            clientName: 'luffy',
         },
     ];
 
