@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router';
+import { useParams, Link } from 'react-router';
 
 // You might want to move this data to a shared location or fetch it
 const allProjectsData = [
@@ -85,6 +85,7 @@ const ClientProjectPage = () => {
 
     return (
         <div className="max-w-4xl mx-auto p-5">
+            <Link to="/" className="text-blue-500 underline mb-5">Back to Projects</Link>
             <h1 className="text-4xl font-bold mb-5">{project.title}</h1>
             <p className="text-lg mb-5">{project.details}</p>
 

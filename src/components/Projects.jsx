@@ -19,7 +19,6 @@ const PolaroidWheel = ({ items }) => {
     const prevItem = () => {
         setCenterIndex((prevIndex) => prevIndex - 1);
         if (centerIndex <= 0) {
-            // setCenterIndex(itemCount + visibleItems * 2 - 1);
             setCenterIndex(itemCount + visibleItems - 1);
         }
     };
@@ -27,7 +26,6 @@ const PolaroidWheel = ({ items }) => {
     const getItemAtIndex = (index) => {
         let normalizedIndex = index;
         if (normalizedIndex < visibleItems) {
-
             normalizedIndex += itemCount;
         } else if (normalizedIndex >= itemCount + visibleItems) {
             normalizedIndex -= itemCount;
@@ -36,47 +34,49 @@ const PolaroidWheel = ({ items }) => {
     };
 
     return (
-        <div className="flex justify-center items-center relative h-[500px] mx-auto overflow-hidden ">
+        <div className="flex justify-center items-center relative h-[300px] sm:h-[400px] md:h-[500px] mx-auto overflow-hidden">
             <button
-                className="absolute left-5 top-1/2 -translate-y-1/2 bg-black/50 text-white border-none w-12 h-12 rounded-full text-xl cursor-pointer z-[100] hover:bg-black/80 transition-colors" onClick={prevItem}>
+                className="absolute left-2 sm:left-3 md:left-5 top-1/2 -translate-y-1/2 bg-black/50 text-white border-none w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full text-base sm:text-lg md:text-xl cursor-pointer z-[100] hover:bg-black/80 transition-colors"
+                onClick={prevItem}>
                 &larr;
             </button>
 
-            <div className="relative w-[1000px] h-full">
+            <div className="relative w-[280px] sm:w-[600px] md:w-[800px] lg:w-[1000px] h-50 mt-0">
                 {Array.from({ length: totalItems }, (_, index) => {
                     const item = getItemAtIndex(index);
                     const relativeIndex = index - centerIndex;
                     const angle = relativeIndex * 45;
                     const zIndex = totalItems - Math.abs(relativeIndex);
 
+                    const translateX = `${relativeIndex * (window.innerWidth < 640 ? 150 : window.innerWidth < 768 ? 250 : 350)}px`;
+
                     return (
-                        <div className={`absolute w-[380px] h-[290px] bg-white p-4 pb-14 shadow-md rounded-md transition-all duration-500 ease-in-out origin-center left-1/2 top-1/2 -ml-[150px] -mt-[175px] ${relativeIndex === 0 ? 'opacity-100' : 'opacity-70'}`}
+                        <div className={`absolute w-[220px] sm:w-[280px] md:w-[320px] lg:w-[380px] h-[180px] sm:h-[220px] md:h-[250px] lg:h-[290px] bg-white p-2 sm:p-3 md:p-4 pb-8 sm:pb-10 md:pb-14 shadow-md rounded-md transition-all duration-500 ease-in-out origin-center left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${relativeIndex === 0 ? 'opacity-100' : 'opacity-70'}`}
                             key={index}
                             style={{
-                                transform: `rotate(${angle}deg) translateX(${relativeIndex * 350}px)`,
+                                transform: `rotate(${angle}deg) translateX(${translateX})`,
                                 zIndex: zIndex,
                             }}
                         >
-                            <div className="w-full h-full flex flex-col">
+                            <a href={`/project/${item.clientName}`} target="_blank" className="w-full h-full flex flex-col">
                                 {item.type === 'image' ? (
                                     <img
                                         src={item.src}
                                         alt={item.title}
-                                        className="w-full h-[200px] object-cover"
+                                        className="w-full h-[100px] sm:h-[140px] md:h-[170px] lg:h-[200px] object-cover"
                                     />
                                 ) : (
                                     <video
-                                        controls
-                                        className="w-full h-[250px] bg-black"
+                                        className="w-full h-[120px] sm:h-[170px] md:h-[200px] lg:h-[250px] bg-black"
                                     >
                                         <source src={item.src} type="video/mp4" />
                                     </video>
                                 )}
-                                <div className="mt-4 font-cal-sans text-lg text-start">
+                                <div className="mt-2 md:mt-4 font-cal-sans text-sm sm:text-base md:text-lg text-start">
                                     {item.title}
                                 </div>
-                            </div>
-                            <div className="absolute bottom-2 right-2 w-12 h-12">
+                            </a>
+                            <div className="absolute bottom-1 sm:bottom-1.5 md:bottom-2 right-1 sm:right-1.5 md:right-2 w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12">
                                 <img
                                     src={item.logo}
                                     alt="logo"
@@ -89,15 +89,13 @@ const PolaroidWheel = ({ items }) => {
             </div>
 
             <button
-                className="absolute right-5 top-1/2 -translate-y-1/2 bg-black/50 text-white border-none w-12 h-12 rounded-full text-xl cursor-pointer z-[100] hover:bg-black/80 transition-colors"
+                className="absolute right-2 sm:right-3 md:right-5 top-1/2 -translate-y-1/2 bg-black/50 text-white border-none w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full text-base sm:text-lg md:text-xl cursor-pointer z-[100] hover:bg-black/80 transition-colors"
                 onClick={nextItem}
             > &rarr;
             </button>
         </div>
-    )
-
+    );
 };
-
 
 const Projects = () => {
 
@@ -148,8 +146,8 @@ const Projects = () => {
 
     return (
         <>
-            <div className="max-w-6xl mx-auto p-5 text-center">
-                <motion.h1 className="font-dm-serif text-3xl text-gray-800"
+            <div className="max-w-6xl mx-auto p-3 sm:p-4 md:p-5 text-center">
+                <motion.h1 className="font-dm-serif text-2xl sm:text-2xl md:text-3xl text-gray-800"
                     initial={{ opacity: 0, y: -25, }}
                     whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.3, } }}
                 >
@@ -157,9 +155,8 @@ const Projects = () => {
                 </motion.h1>
                 <PolaroidWheel items={polaroidItems} />
             </div>
-
         </>
-    )
-}
+    );
+};
 
 export default Projects;
