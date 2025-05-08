@@ -52,7 +52,7 @@ const AboutSection = () => {
 
   return (
     <Section alignItems="items-center" className="text-justify">
-      <motion.h1 className="text-5xl font-medium text-center my-4 font-dm-serif"
+      <motion.h1 className="text-5xl font-medium text-center my-6 font-dm-serif"
         initial={{ opacity: 0, x: -15, }}
         whileInView={{ opacity: 1, x: 0, transition: { duration: 1, delay: 0.7, } }}
       >We’re Not Your Average Video Crew</motion.h1>
@@ -77,7 +77,7 @@ const AboutSection = () => {
 const ContactSection = () => {
   return (
     <Section alignItems="items-center">
-      <div className="flex flex-col items-center text-center mb-8">
+      <div className="flex flex-col items-center text-center mt-8">
         <h2 className="text-4xl font-dm-serif">Ready to make some Noise?</h2>
         <p className="font-cal-sans text-lg max-w-lg">Drop us a line, and let’s start turning your ideas into something that’ll blow minds.</p>
       </div>

@@ -7,9 +7,12 @@ import { Navbar } from './components/Navbar';
 import { useState, useEffect } from 'react';
 import { MotionConfig } from 'framer-motion';
 import { Cursor } from './components/Cursor';
+import { LoadingScreen } from './components/LoadingScreen';
+import { Suspense } from 'react';
 
 export default function App() {
   const [section, setSection] = useState(0);
+  const [started, onStarted] = useState(false);
   const [menuOpened, setMenuOpened] = useState(false);
 
   useEffect(() => {
@@ -18,16 +21,23 @@ export default function App() {
 
   return (
     <>
+      <LoadingScreen started={started} setStarted={onStarted} />
       <MotionConfig transition={{ type: 'spring', mass: 5, stiffness: 500, damping: 50, restDelta: 0.0001 }}>
         <Canvas shadows camera={{ position: [30, 30, -25], fov: 50 }}>
           <color attach="background" args={["#fbe7ff"]} />
           <ScrollControls pages={4} damping={0.1}>
             <ScrollManager section={section} onSectionChange={setSection} />
             <Scroll>
-              <Experience section={section} menuOpened={menuOpened} />
+              <Suspense>
+                {started && (
+                  <Experience section={section} menuOpened={menuOpened} />
+                )}
+              </Suspense>
             </Scroll>
             <Scroll html>
-              <Interface />
+              {started &&
+                <Interface />
+              }
             </Scroll>
           </ScrollControls>
         </Canvas>
