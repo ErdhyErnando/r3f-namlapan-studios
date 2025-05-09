@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import Projects from './Projects';
+import toast from 'react-hot-toast';
 
 const Section = (props) => {
   const { children, alignItems = 'items-start' } = props
@@ -75,24 +76,66 @@ const AboutSection = () => {
 }
 
 const ContactSection = () => {
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    toast("Sending...", {
+      style: {
+        background: "#fff",
+        color: "#000",
+      },
+    });
+    const formData = new FormData(event.target);
+
+    formData.append("access_key", import.meta.env.VITE_WEB_ACCESS_TOKEN);
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      toast("We've received your message full of ideas", {
+        icon: "🥳",
+        style: {
+          borderRadius: "10px",
+          background: "#fff",
+          color: "#000",
+        },
+      });
+      event.target.reset();
+    } else {
+      console.log("Error:", data);
+      toast.error("Error sending message. Please try again later.", {
+        style: {
+          borderRadius: "10px",
+          background: "#fff",
+          color: "#000",
+        },
+      });
+    }
+  }
+
   return (
     <Section alignItems="items-center">
       <div className="flex flex-col items-center text-center mt-8">
         <h2 className="text-4xl font-dm-serif">Ready to make some Noise?</h2>
         <p className="font-cal-sans text-lg max-w-lg">Drop us a line, and let’s start turning your ideas into something that’ll blow minds.</p>
       </div>
-      <form className="w-full max-w-2xl">
+      <form className="w-full max-w-2xl" onSubmit={onSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div className="flex flex-col">
             <label htmlFor="name" className="mb-1 font-cal-sans">Name:</label>
-            <input type="text" id="name" name="name" placeholder="What should we call you?" className="p-2 rounded-md outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500" />
+            <input type="text" id="name" name="name" placeholder="What should we call you?" className="p-2 rounded-md outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500" required />
           </div>
           <div className="flex flex-col">
             <label htmlFor="phone" className="mb-1 font-cal-sans">Phone Number:</label>
             <input type="tel" id="phone" name="phone" placeholder="[Your Number]" className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500" />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="email" className="mb-1 font-cal-sans">Email:</label>
+            <label htmlFor="email" className="mb-1 font-cal-sans" required>Email:</label>
             <input type="email" id="email" name="email" placeholder="Where can we hit you back?" className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500" />
           </div>
           <div className="flex flex-col">
@@ -112,7 +155,9 @@ const ContactSection = () => {
           <textarea id="message" name="message"
             placeholder="Spill the tea 🍵, what story you want to tell?"
             rows="4"
-            className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500"></textarea>
+            className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500"
+            required
+          ></textarea>
         </div>
         <div className="flex justify-center">
           <button type="submit" className="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-700 font-cal-sans tracking-wide w-full md:w-auto">Send</button>

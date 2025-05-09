@@ -9,6 +9,7 @@ import { MotionConfig } from 'framer-motion';
 import { Cursor } from './components/Cursor';
 import { LoadingScreen } from './components/LoadingScreen';
 import { Suspense } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 export default function App() {
   const [section, setSection] = useState(0);
@@ -22,6 +23,7 @@ export default function App() {
   return (
     <>
       <LoadingScreen started={started} setStarted={onStarted} />
+      <Toaster position='top-right' reverseOrder={false} />
       <MotionConfig transition={{ type: 'spring', mass: 5, stiffness: 500, damping: 50, restDelta: 0.0001 }}>
         <Canvas shadows camera={{ position: [30, 30, -25], fov: 50 }}>
           <color attach="background" args={["#fbe7ff"]} />

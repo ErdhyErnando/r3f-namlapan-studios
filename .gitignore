@@ -25,3 +25,7 @@ dist-ssr
 
 # 3d
 models
+
+# env
+.env
+.env.*
