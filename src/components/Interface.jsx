@@ -27,6 +27,7 @@ export const Interface = () => {
   </div>
 }
 
+// Hero Section
 const HeroSection = () => {
   return (
     <Section>
@@ -49,6 +50,8 @@ const HeroSection = () => {
   )
 }
 
+
+// About Section
 const AboutSection = () => {
 
   return (
@@ -75,6 +78,7 @@ const AboutSection = () => {
   )
 }
 
+// Contact Section
 const ContactSection = () => {
 
   const onSubmit = async (event) => {

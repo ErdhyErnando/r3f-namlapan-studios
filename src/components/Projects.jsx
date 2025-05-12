@@ -35,13 +35,7 @@ const PolaroidWheel = ({ items }) => {
     };
 
     return (
-        <div className="flex justify-center items-center relative h-[300px] sm:h-[400px] md:h-[500px] mx-auto overflow-hidden">
-            <button
-                className="absolute left-2 sm:left-3 md:left-5 top-1/2 -translate-y-1/2 bg-black/50 text-white border-none w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full text-base sm:text-lg md:text-xl cursor-pointer z-[100] hover:bg-black/80 transition-colors"
-                onClick={prevItem}>
-                &larr;
-            </button>
-
+        <div className="flex flex-col justify-center items-center relative h-[300px] sm:h-[400px] md:h-[500px] mx-auto overflow-hidden">
             <div className="relative w-[280px] sm:w-[600px] md:w-[800px] lg:w-[1000px] h-50 mt-0">
                 {Array.from({ length: totalItems }, (_, index) => {
                     const item = getItemAtIndex(index);
@@ -89,11 +83,20 @@ const PolaroidWheel = ({ items }) => {
                 })}
             </div>
 
-            <button
-                className="absolute right-2 sm:right-3 md:right-5 top-1/2 -translate-y-1/2 bg-black/50 text-white border-none w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full text-base sm:text-lg md:text-xl cursor-pointer z-[100] hover:bg-black/80 transition-colors"
-                onClick={nextItem}
-            > &rarr;
-            </button>
+            {/* Navigation buttons - positioned at bottom for small screens, sides for larger screens */}
+            <div className="flex justify-center items-center w-full mt-8 sm:mt-10 md:mt-0">
+                <button
+                    className="md:absolute md:left-2 lg:left-5 md:top-1/2 md:-translate-y-1/2 bg-black/50 text-white border-none w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full text-base sm:text-lg md:text-xl cursor-pointer z-[100] hover:bg-black/80 transition-colors mx-2 md:mx-0"
+                    onClick={prevItem}>
+                    &larr;
+                </button>
+
+                <button
+                    className="md:absolute md:right-2 lg:right-5 md:top-1/2 md:-translate-y-1/2 bg-black/50 text-white border-none w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full text-base sm:text-lg md:text-xl cursor-pointer z-[100] hover:bg-black/80 transition-colors mx-2 md:mx-0"
+                    onClick={nextItem}>
+                    &rarr;
+                </button>
+            </div>
         </div>
     );
 };
