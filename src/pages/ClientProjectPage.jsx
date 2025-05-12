@@ -1,7 +1,10 @@
-import React from 'react';
 import { useParams, Link } from 'react-router';
+import { useState } from 'react';
+import BackButton from '../components/BackButton';
+import ProgressBar from '../components/ProgressBar';
+import Gallery from '../components/Gallery';
+import Lightbox from '../components/Lightbox';
 
-// You might want to move this data to a shared location or fetch it
 const allProjectsData = [
     {
         type: 'image',
@@ -69,13 +72,29 @@ const allProjectsData = [
         clientName: 'luffy',
         details: 'A project about Luffy.',
         gallery: [
-            'https://pub-e54c94b2502642d69cab5d6cd5d70cee.r2.dev/luffy-1.png'
+            'https://pub-e54c94b2502642d69cab5d6cd5d70cee.r2.dev/luffy-1.png',
+            'https://cdn.oneesports.gg/cdn-data/2024/02/Anime_MonkeyDLuffy.jpg',
+            'https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/08/one-piece-luffy-gear-5-eyes-pop-out-cropped.jpg'
+
         ]
     },
 ];
 
 
 const ClientProjectPage = () => {
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+    const [currentImage, setCurrentImage] = useState("");
+
+    const openLightbox = (src) => {
+        setCurrentImage(src);
+        setIsLightboxOpen(true);
+    };
+
+    const closeLightbox = () => {
+        setCurrentImage("");
+        setIsLightboxOpen(false);
+    };
+
     const { clientName } = useParams();
     const project = allProjectsData.find(p => p.clientName === clientName);
 
@@ -84,27 +103,17 @@ const ClientProjectPage = () => {
     }
 
     return (
-        <div className="max-w-4xl mx-auto p-5">
-            <Link to="/" className="text-blue-500 underline mb-5">Back to Projects</Link>
-            <h1 className="text-4xl font-bold mb-5">{project.title}</h1>
-            <p className="text-lg mb-5">{project.details}</p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {project.gallery && project.gallery.map((mediaSrc, index) => (
-                    <div key={index} className="bg-gray-200 rounded-lg overflow-hidden">
-                        {project.type === 'image' || mediaSrc.endsWith('.png') || mediaSrc.endsWith('.jpeg') || mediaSrc.endsWith('.jpg') ? (
-                            <img src={mediaSrc} alt={`${project.title} - gallery ${index + 1}`} className="w-full h-auto object-cover" />
-                        ) : (
-                            <video controls className="w-full h-auto">
-                                <source src={mediaSrc} type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
-                        )}
-                    </div>
-                ))}
+        <main className='flex w-full h-screen overflow-hidden font-dm-serif'>
+            <div className='relative flex-grow h-screen overflow-hidden'>
+                <BackButton />
+                <ProgressBar />
+                <Gallery openLightbox={openLightbox} projectGallery={project.gallery} />
             </div>
-            {/* You can add more project-specific content here */}
-        </div>
+
+            {isLightboxOpen && (
+                <Lightbox currentImage={currentImage} closeLightBox={closeLightbox} />
+            )}
+        </main>
     );
 };
 
