@@ -1,4 +1,5 @@
 import { useEffect, useRef, useMemo } from "react";
+import { motion } from "framer-motion";
 
 const Gallery = ({ openLightbox, projectGallery }) => {
     const galleryContainerRef = useRef(null);
@@ -85,7 +86,7 @@ const Gallery = ({ openLightbox, projectGallery }) => {
                 </div>
 
                 {memoizedRandomizedImages.map((image, index) => (
-                    <img
+                    <motion.img
                         key={index}
                         src={image.src}
                         alt={`Gallery Image ${index + 1}`}
@@ -95,6 +96,8 @@ const Gallery = ({ openLightbox, projectGallery }) => {
                             alignSelf: image.randomAlignment,
                         }}
                         onClick={() => openLightbox(image.src)}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
                     />
                 ))}
             </div>

@@ -25,8 +25,15 @@ export default function App() {
       <LoadingScreen started={started} setStarted={onStarted} />
       <Toaster position='top-right' reverseOrder={false} />
       <MotionConfig transition={{ type: 'spring', mass: 5, stiffness: 500, damping: 50, restDelta: 0.0001 }}>
-        <Canvas shadows camera={{ position: [30, 30, -25], fov: 50 }}>
-          <color attach="background" args={["#fbe7ff"]} />
+        <Canvas
+          shadows
+          camera={{ position: [30, 30, -25], fov: 50 }}
+          gl={{ alpha: true }} // Enable transparency for the canvas
+          style={{
+            background: 'linear-gradient(to bottom, #ff7e5f, #ffb36b, #ce93d8, #4a148c)', // Sunset gradient
+          }}
+        >
+          {/* <color attach="background" args={["#fbe7ff"]} />  -- This line is removed -- */}
           <ScrollControls pages={4} damping={0.1}>
             <ScrollManager section={section} onSectionChange={setSection} />
             <Scroll>

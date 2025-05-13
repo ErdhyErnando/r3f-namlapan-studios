@@ -29,23 +29,27 @@ export const Interface = () => {
 
 // Hero Section
 const HeroSection = () => {
+
   return (
     <Section>
       <motion.h1
-        className="text-3xl md:text-4xl font-cal-sans leading-snug my-0"
+        className="text-[1.5rem] md:text-5xl font-cal-sans leading-snug"
         initial={{ opacity: 0, y: -15, }}
         whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.3, } }}
-      >Bantu Ubah Ide 'Gila-mu'</motion.h1>
+      >Bantu Ubah Ide <span className='italic'>'Gila-mu'</span></motion.h1>
       <motion.h1
-        className="text-5xl md:text-6xl font-dm-serif leading-snug bg-white"
+        className="text-3xl md:text-6xl font-cal-sans mx-0 md:-mt-3"
         initial={{ opacity: 0, y: -15, }}
         whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.7, } }}
       > Jadi Realitas Sinematik</motion.h1>
-      <motion.button
-        className="bg-yellow-500 text-white px-5 py-2 rounded-lg mt-4 hover:bg-iyellow-700 font-cal-sans tracking-widest"
-        initial={{ opacity: 0, y: -15, }}
-        whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 1, } }}
-      >Get Started</motion.button>
+      <motion.div className="flex items-start flex-row md:flex-row gap-4 -mt-1">
+
+        <motion.button
+          className="bg-yellow-300 text-white text-shadow-xs px-5 py-2 rounded-full mt-4 hover:bg-yellow-400 tracking-normal"
+          initial={{ opacity: 0, y: -15, }}
+          whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 1.2, } }}
+        >Hubungi Kami</motion.button>
+      </motion.div>
     </Section>
   )
 }
@@ -164,7 +168,7 @@ const ContactSection = () => {
           ></textarea>
         </div>
         <div className="flex justify-center">
-          <button type="submit" className="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-700 font-cal-sans tracking-wide w-full md:w-auto">Send</button>
+          <button type="submit" className="bg-yellow-300 text-white px-6 py-2 rounded-full hover:bg-yellow-500 w-full md:w-auto">Send</button>
         </div>
       </form>
     </Section>

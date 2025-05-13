@@ -74,7 +74,9 @@ const allProjectsData = [
         gallery: [
             'https://pub-e54c94b2502642d69cab5d6cd5d70cee.r2.dev/luffy-1.png',
             'https://cdn.oneesports.gg/cdn-data/2024/02/Anime_MonkeyDLuffy.jpg',
-            'https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/08/one-piece-luffy-gear-5-eyes-pop-out-cropped.jpg'
+            'https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/08/one-piece-luffy-gear-5-eyes-pop-out-cropped.jpg',
+            'https://www.thepopverse.com/_next/image?url=https%3A%2F%2Fmedia.thepopverse.com%2Fmedia%2Fluffy-gear-5-eyes-and-smiling-g3aldq0s12hfhnfhqgldqcg4py.jpg&w=1280&q=75',
+            'https://comicbook.com/wp-content/uploads/sites/4/2024/04/a7aafa1a-295d-4cb7-b5c1-c9a6a6a5dfb7.jpg'
 
         ]
     },
@@ -104,7 +106,8 @@ const ClientProjectPage = () => {
 
     return (
         <main className='flex w-full h-screen overflow-hidden font-dm-serif'>
-            <div className='relative flex-grow h-screen overflow-hidden'>
+            {/* <div className='relative flex-grow h-screen overflow-hidden bg-gradient-to-b from-orange-400 via-pink-500 to-purple-600'> */}
+            <div className='relative flex-grow h-screen overflow-hidden bg-zinc-200'>
                 <BackButton />
                 <ProgressBar />
                 <Gallery openLightbox={openLightbox} projectGallery={project.gallery} />

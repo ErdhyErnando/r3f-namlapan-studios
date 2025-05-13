@@ -35,7 +35,7 @@ const PolaroidWheel = ({ items }) => {
     };
 
     return (
-        <div className="flex flex-col justify-center items-center relative h-[300px] sm:h-[400px] md:h-[500px] mx-auto overflow-hidden">
+        <div id="project-wheel" className="flex flex-col justify-center items-center relative h-[300px] sm:h-[400px] md:h-[500px] mx-auto overflow-hidden">
             <div className="relative w-[280px] sm:w-[600px] md:w-[800px] lg:w-[1000px] h-50 mt-0">
                 {Array.from({ length: totalItems }, (_, index) => {
                     const item = getItemAtIndex(index);
