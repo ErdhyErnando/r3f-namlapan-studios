@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import Projects from './Projects';
 import toast from 'react-hot-toast';
+import { HiOutlineMailOpen } from 'react-icons/hi';
+import { BsWhatsapp } from 'react-icons/bs';
 
 const Section = (props) => {
   const { children, alignItems = 'items-start' } = props
@@ -31,7 +33,7 @@ export const Interface = () => {
 const HeroSection = () => {
 
   return (
-    <Section>
+    <Section className="px-12 ">
       <motion.h1
         className="text-[1.5rem] md:text-5xl font-cal-sans leading-snug"
         initial={{ opacity: 0, y: -15, }}
@@ -45,7 +47,7 @@ const HeroSection = () => {
       <motion.div className="flex items-start flex-row md:flex-row gap-4 -mt-1">
 
         <motion.button
-          className="bg-yellow-300 text-white text-shadow-xs px-5 py-2 rounded-full mt-4 hover:bg-yellow-400 tracking-normal"
+          className="bg-yellow-300 text-white text-shadow-xs px-5 py-2 rounded-full mt-4 hover:bg-yellow-400 tracking-normal hover:cursor-pointer"
           initial={{ opacity: 0, y: -15, }}
           whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 1.2, } }}
         >Hubungi Kami</motion.button>
@@ -63,20 +65,22 @@ const AboutSection = () => {
       <motion.h1 className="text-5xl font-medium text-center my-6 font-dm-serif"
         initial={{ opacity: 0, x: -15, }}
         whileInView={{ opacity: 1, x: 0, transition: { duration: 1, delay: 0.7, } }}
-      >We’re Not Your Average Video Crew</motion.h1>
+      >Kami Bukan Kru Video Biasa</motion.h1>
       <div className="rounded-lg outline outline-white/5 bg-gray-950/70 p-4">
         <motion.p className="text-xl/loose text-white mb-8 font-cal-sans"
           initial={{ opacity: 0, x: -15, }}
           whileInView={{ opacity: 1, x: 0, transition: { duration: 1, delay: 0.9, } }}
         >
-          Namlapan Studios is where raw creativity meets fearless execution. Born from a love of storytelling and a hatred of boring,
-          <br />we’re a squad of misfits who live for crafting videos that spark conversations. </motion.p>
+          Namlapan Studios adalah tempat kreativitas bertemu dengan eksekusi tanpa rasa takut. Lahir dari kecintaan pada penceritaan dan kebencian pada hal yang membosankan,
+          <br />kami adalah tim yang hidup untuk membuat video yang memicu percakapan.
+        </motion.p>
         <motion.p className="text-xl/loose text-white mb-4 font-cal-sans"
           initial={{ opacity: 0, x: -15, }}
           whileInView={{ opacity: 1, x: 0, transition: { duration: 1, delay: 1, } }}
         >
-          Based in Jabodetabek, we blend grit, soul, and a touch of weird to make every project uniquely yours.
-          <br />No cookie-cutter vibes here—just real, bold, and a little unhinged.</motion.p>
+          Berbasis di Jabodetabek, kami memadukan semangat, jiwa, dan sentuhan unik untuk membuat setiap proyek menjadi istimewa.
+          <br />Tidak ada yang biasa-biasa saja di sini—hanya karya yang nyata, berani, dan sedikit out-of-the-box.
+        </motion.p>
       </div>
     </Section>
   )
@@ -87,7 +91,7 @@ const ContactSection = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    toast("Sending...", {
+    toast("Mengirim...", {
       style: {
         background: "#fff",
         color: "#000",
@@ -105,7 +109,7 @@ const ContactSection = () => {
     const data = await response.json();
 
     if (data.success) {
-      toast("We've received your message full of ideas", {
+      toast("Pesan Anda telah kami terima!", {
         icon: "🥳",
         style: {
           borderRadius: "10px",
@@ -116,7 +120,7 @@ const ContactSection = () => {
       event.target.reset();
     } else {
       console.log("Error:", data);
-      toast.error("Error sending message. Please try again later.", {
+      toast.error("Gagal mengirim pesan. Silakan coba lagi nanti.", {
         style: {
           borderRadius: "10px",
           background: "#fff",
@@ -129,48 +133,60 @@ const ContactSection = () => {
   return (
     <Section alignItems="items-center">
       <div className="flex flex-col items-center text-center mt-8">
-        <h2 className="text-4xl font-dm-serif">Ready to make some Noise?</h2>
-        <p className="font-cal-sans text-lg max-w-lg">Drop us a line, and let’s start turning your ideas into something that’ll blow minds.</p>
+        <h2 className="text-4xl font-dm-serif">Siap Membuat Gebrakan?</h2>
+        <p className="font-cal-sans text-lg max-w-lg">Hubungi kami, dan mari kita mulai mengubah ide-ide Anda menjadi sesuatu yang luar biasa.</p>
       </div>
       <form className="w-full max-w-2xl" onSubmit={onSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div className="flex flex-col">
-            <label htmlFor="name" className="mb-1 font-cal-sans">Name:</label>
-            <input type="text" id="name" name="name" placeholder="What should we call you?" className="p-2 rounded-md outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500" required />
+            <label htmlFor="name" className="mb-1 font-cal-sans">Nama:</label>
+            <input type="text" id="name" name="name" placeholder="Nama Anda" className="p-2 rounded-md outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500" required />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="phone" className="mb-1 font-cal-sans">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" placeholder="[Your Number]" className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500" />
+            <label htmlFor="phone" className="mb-1 font-cal-sans">Nomor Telepon:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Nomor Anda" className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500" />
           </div>
           <div className="flex flex-col">
             <label htmlFor="email" className="mb-1 font-cal-sans" required>Email:</label>
-            <input type="email" id="email" name="email" placeholder="Where can we hit you back?" className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500" />
+            <input type="email" id="email" name="email" placeholder="Alamat email Anda" className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500" />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="source" className="mb-1 font-cal-sans">Where did you hear about us?</label>
+            <label htmlFor="source" className="mb-1 font-cal-sans">Dari mana Anda mendengar tentang kami?</label>
             <select id="source" name="source" className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black">
-              <option value="">Select an option</option>
-              <option value="social_media">Social Media</option>
-              <option value="referral">Referral</option>
-              <option value="search_engine">Search Engine</option>
-              <option value="advertisement">Advertisement</option>
-              <option value="other">Other</option>
+              <option value="">Pilih salah satu</option>
+              <option value="social_media">Media Sosial</option>
+              <option value="referral">Rekomendasi</option>
+              <option value="search_engine">Mesin Pencari</option>
+              <option value="advertisement">Iklan</option>
+              <option value="other">Lainnya</option>
             </select>
           </div>
         </div>
         <div className="flex flex-col mb-4">
-          <label htmlFor="message" className="mb-1 font-cal-sans">Message Us:</label>
+          <label htmlFor="message" className="mb-1 font-cal-sans">Pesan Anda:</label>
           <textarea id="message" name="message"
-            placeholder="Spill the tea 🍵, what story you want to tell?"
+            placeholder="Ceritakan kepada kami, kisah apa yang ingin Anda sampaikan?"
             rows="4"
             className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500"
             required
           ></textarea>
         </div>
         <div className="flex justify-center">
-          <button type="submit" className="bg-yellow-300 text-white px-6 py-2 rounded-full hover:bg-yellow-500 w-full md:w-auto">Send</button>
+          <button type="submit" className="bg-yellow-300 text-white px-6 py-2 rounded-full hover:bg-yellow-500 w-full md:w-auto">Kirim</button>
         </div>
       </form>
+
+      <div className="mt-8 text-center">
+        <p className="font-cal-sans">Atau Anda dapat menghubungi kami melalui:</p>
+        <div className="flex justify-center gap-4 mt-2">
+          <a href="mailto:namlapanstudios@gmail.com" target="_blank" rel="noopener noreferrer">
+            <HiOutlineMailOpen className="text-3xl  cursor-pointer hover:text-yellow-600 transition-colors" />
+          </a>
+          <a href="https://wa.me/+628568991707" target="_blank" rel="noopener noreferrer">
+            <BsWhatsapp className="text-3xl  cursor-pointer hover:text-yellow-600 transition-colors" />
+          </a>
+        </div>
+      </div>
     </Section>
   )
 }

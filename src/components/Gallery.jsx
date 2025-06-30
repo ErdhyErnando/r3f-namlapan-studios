@@ -1,7 +1,7 @@
 import { useEffect, useRef, useMemo } from "react";
 import { motion } from "framer-motion";
 
-const Gallery = ({ openLightbox, projectGallery }) => {
+const Gallery = ({ openLightbox, project }) => {
     const galleryContainerRef = useRef(null);
 
     useEffect(() => {
@@ -40,13 +40,13 @@ const Gallery = ({ openLightbox, projectGallery }) => {
         };
     }, []);
 
-    const images = projectGallery;
+    const images = project.gallery;
 
     // Memoize the randomized image properties
     const memoizedRandomizedImages = useMemo(() => {
         const getRandomHeight = () => {
-            const minHeight = 20;
-            const maxHeight = 50;
+            const minHeight = 40;
+            const maxHeight = 70;
             return Math.floor(
                 Math.random() * (maxHeight - minHeight + 1) + minHeight
             );
@@ -57,14 +57,31 @@ const Gallery = ({ openLightbox, projectGallery }) => {
             return alignments[Math.floor(Math.random() * alignments.length)];
         };
 
+        const getMediaTypeAndSrc = (url) => {
+            const youtubeRegex = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#&?]*).*/;
+            const match = url.match(youtubeRegex);
+
+            if (match && match[2].length === 11) {
+                const videoId = match[2];
+                return {
+                    type: "youtube",
+                    src: `https://www.youtube.com/embed/${videoId}`,
+                };
+            } else if (url.match(/\.(jpeg|jpg|gif|png)$/)) {
+                return { type: "image", src: url };
+            } else {
+                return { type: "video", src: url };
+            }
+        };
+
         return [...images]
             .sort(() => Math.random() - 0.5)
             .map((src) => ({
-                src,
+                ...getMediaTypeAndSrc(src),
                 randomHeight: getRandomHeight(),
                 randomAlignment: getRandomAlignment(),
             }));
-    }, []);
+    }, [images]);
 
     return (
         <div
@@ -72,34 +89,61 @@ const Gallery = ({ openLightbox, projectGallery }) => {
             className="gallery-container flex overflow-x-scroll overflow-y-hidden whitespace-nowrap h-screen"
         >
             <div className="gallery flex justify-start min-w-max p-5 h-full items-center">
-                <div className="p-10 flex flex-col justify-center text-blue-900 mr-10 flex-shrink-0 w-[280px] sm:w-[320px] md:w-[380px] lg:w-[420px]">
-                    <h1 className="text-2xl md:text-4xl font-bold mb-4 text-blue-900">
-                        Welcome to the Gallery
+                <div className="p-10 flex flex-col justify-center text-blue-900 mr-24 flex-shrink-0 w-[320px] sm:w-[420px] md:w-[520px] lg:w-[620px]">
+                    <h1 className="text-2xl md:text-4xl font-bold mb-4 text-blue-900 whitespace-normal">
+                        {project.title}
                     </h1>
                     <p className="text-lg mb-2 whitespace-normal text-blue-900">
-                        Scroll to the right to explore a collection of beautiful images.
+                        {project.details}
                     </p>
                     <p className="text-md whitespace-normal text-blue-900">
-                        Each image is uniquely sized and positioned for a dynamic viewing
-                        experience.
+                        Geser ke Kanan untuk melihat lebih banyak
                     </p>
                 </div>
 
-                {memoizedRandomizedImages.map((image, index) => (
-                    <motion.img
-                        key={index}
-                        src={image.src}
-                        alt={`Gallery Image ${index + 1}`}
-                        className="gallery-image rounded-lg shadow-md transition-transform hover:scale-102 cursor-pointer mr-4"
-                        style={{
-                            maxHeight: `${image.randomHeight}vh`,
-                            alignSelf: image.randomAlignment,
-                        }}
-                        onClick={() => openLightbox(image.src)}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                    />
-                ))}
+                {memoizedRandomizedImages.map((item, index) => {
+                    if (item.type === "image") {
+                        return (
+                            <motion.img
+                                key={index}
+                                src={item.src}
+                                alt={`Gallery Image ${index + 1}`}
+                                className="gallery-image rounded-lg shadow-md transition-transform hover:scale-102 cursor-pointer mr-4"
+                                style={{
+                                    maxHeight: `${item.randomHeight}vh`,
+                                    alignSelf: item.randomAlignment,
+                                }}
+                                onClick={() => openLightbox(item.src)}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                            />
+                        );
+                    } else if (item.type === "youtube") {
+                        return (
+                            <motion.div
+                                key={index}
+                                className="gallery-video rounded-lg shadow-md mr-4 overflow-hidden"
+                                style={{
+                                    height: `${item.randomHeight}vh`,
+                                    width: `${item.randomHeight * 1.77}vh`,
+                                    alignSelf: item.randomAlignment,
+                                }}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                            >
+                                <iframe
+                                    src={item.src}
+                                    title={`Gallery Video ${index + 1}`}
+                                    className="w-full h-full"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                ></iframe>
+                            </motion.div>
+                        );
+                    }
+                    return null;
+                })}
             </div>
         </div>
     );

@@ -40,11 +40,10 @@ export const Navbar = (props) => {
             <div>
               <h3 className="text-base my-2">Contact Us!</h3>
               <div className="flex gap-2">
-                <a href="mailto:your-email@example.com" target="_blank" rel="noopener noreferrer">
+                <a href="mailto:namlapanstudios@gmail.com" target="_blank" rel="noopener noreferrer">
                   <HiOutlineMailOpen className="text-3xl  cursor-pointer hover:text-yellow-600 transition-colors" />
                 </a>
-                {/* TODO: Add your WhatsApp link */}
-                <a href="" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/+628568991707" target="_blank" rel="noopener noreferrer">
                   <BsWhatsapp className="text-3xl  cursor-pointer hover:text-yellow-600 transition-colors" />
                 </a>
               </div>

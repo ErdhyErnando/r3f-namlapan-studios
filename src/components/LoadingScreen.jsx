@@ -20,7 +20,7 @@ export const LoadingScreen = (props) => {
         >
             <div className="text-4xl md:text-9xl font-dm-serif text-indigo-900 relative">
                 <div
-                    className="absolute left-0 top-0 overflow-hidden truncate text-clip transiton-all duration-500 "
+                    className="absolute left-0 top-0 overflow-hidden transition-all duration-500 whitespace-nowrap"
                     style={{
                         width: `${progress}%`,
                     }}
