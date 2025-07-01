@@ -10,6 +10,7 @@ import { Cursor } from './components/Cursor';
 import { LoadingScreen } from './components/LoadingScreen';
 import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
+import { colorPallete } from './constants/projectData';
 
 export default function App() {
   const [section, setSection] = useState(0);
@@ -30,7 +31,7 @@ export default function App() {
           camera={{ position: [30, 30, -25], fov: 50 }}
           gl={{ alpha: true }} // Enable transparency for the canvas
           style={{
-            background: 'linear-gradient(to bottom, #ff7e5f, #ffb36b, #ce93d8, #4a148c)', // Sunset gradient
+            background: `linear-gradient(to bottom, ${colorPallete.brightTurquoise}, ${colorPallete.darkTurquoise}, ${colorPallete.teal}, ${colorPallete.darkTeal}, ${colorPallete.indigo}, ${colorPallete.purple}, ${colorPallete.darkPurple}, ${colorPallete.veryDarkPurple}, ${colorPallete.darkBluePurple})`,
           }}
         >
           {/* <color attach="background" args={["#fbe7ff"]} />  -- This line is removed -- */}
