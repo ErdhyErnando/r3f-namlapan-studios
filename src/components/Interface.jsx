@@ -8,7 +8,7 @@ const Section = (props) => {
   const { children, alignItems = 'items-start' } = props
 
   return (
-    <motion.section className={`h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col ${alignItems} justify-center`}
+    <motion.section className={`min-h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col ${alignItems} justify-center`}
       initial={{ opacity: 0, y: 50, }}
       whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.6, } }}
     >
@@ -77,7 +77,7 @@ const AboutSection = () => {
         initial={{ opacity: 0, x: -15, }}
         whileInView={{ opacity: 1, x: 0, transition: { duration: 1, delay: 0.7, } }}
       >Kami Bukan Kru Video Biasa</motion.h1>
-      <div className="rounded-lg outline outline-white/5 bg-gray-950/70 p-4">
+      <div className="max-w-3xl rounded-lg outline outline-white/5 bg-gray-950/70 p-4">
         <motion.p className="text-xl/loose text-white mb-8 font-cal-sans"
           initial={{ opacity: 0, x: -15, }}
           whileInView={{ opacity: 1, x: 0, transition: { duration: 1, delay: 0.9, } }}
@@ -142,7 +142,7 @@ const ContactSection = () => {
   }
 
   return (
-    <Section alignItems="items-center">
+    <Section alignItems="items-center" className="mt-12 py-12">
       <div className="flex flex-col items-center text-center mt-8">
         <h2 className="text-4xl font-dm-serif">Siap Membuat Gebrakan?</h2>
         <p className="font-cal-sans text-lg max-w-lg">Hubungi kami, dan mari kita mulai mengubah ide-ide Anda menjadi sesuatu yang luar biasa.</p>
@@ -187,7 +187,7 @@ const ContactSection = () => {
         </div>
       </form>
 
-      <div className="mt-8 text-center">
+      <div className="mt-8 text-center pb-8">
         <p className="font-cal-sans">Atau Anda dapat menghubungi kami melalui:</p>
         <div className="flex justify-center gap-4 mt-2">
           <a href="mailto:namlapanstudios@gmail.com" target="_blank" rel="noopener noreferrer">

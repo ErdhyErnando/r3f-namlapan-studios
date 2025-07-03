@@ -65,6 +65,7 @@ import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useThree } from "@react-three/fiber";
 import { PhotoStudio } from "./PhotoStudio";
+import { GradientBackground3D } from "./GradientBackground3D";
 
 export const Experience = (props) => {
   const { section, isExploring } = props;
@@ -83,6 +84,7 @@ export const Experience = (props) => {
   return (
     <>
       {/* OrbitControls will now handle all camera movement */}
+      {/* <GradientBackground3D /> */}
       <OrbitControls target={[0, 1, 0]} enabled={isExploring} />
       <directionalLight
         ref={directionalLightRef}

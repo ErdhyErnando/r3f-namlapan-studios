@@ -84,15 +84,11 @@ export const allProjectsData = [
     // },
 ];
 
-export const colorPallete = {
-    brightTurquoise: '#57F0DE',
-    darkTurquoise: '#06D2AC',
-    teal: '#028CAD',
-    darkTeal: '#206975',
-    indigo: '#4D4B88',
-    purple: '#6F3AA4',
-    darkPurple: '#593873',
-    veryDarkPurple: '#4D3079',
-    darkBluePurple: '#30285A',
+export const colorPalette = {
+    white: '#FAFAFA',
+    lightTeal: '#70ccc1',
+    darkTeal: '#115e7e',
+    black: '#050505',
+    orangeYellow: '#fcb946',
+    salmon: '#f6935a'
 };
-
