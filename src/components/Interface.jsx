@@ -8,7 +8,7 @@ const Section = (props) => {
   const { children, alignItems = 'items-start' } = props
 
   return (
-    <motion.section className={`h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col ${alignItems} justify-center`}
+    <motion.section className={`min-h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col ${alignItems} justify-center`}
       initial={{ opacity: 0, y: 50, }}
       whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.6, } }}
     >
@@ -18,9 +18,10 @@ const Section = (props) => {
   )
 }
 
-export const Interface = () => {
+export const Interface = (props) => {
+  const { onSectionChange, isExploring, setIsExploring } = props;
   return <div className="flex flex-col items-center w-screen">
-    <HeroSection />
+    <HeroSection onSectionChange={onSectionChange} isExploring={isExploring} setIsExploring={setIsExploring} />
     <Section className="bg-gray-950/70 mt-20">
       <Projects />
     </Section>
@@ -30,27 +31,37 @@ export const Interface = () => {
 }
 
 // Hero Section
-const HeroSection = () => {
+const HeroSection = (props) => {
+  const { onSectionChange, isExploring, setIsExploring } = props;
 
   return (
     <Section className="px-12 ">
       <motion.h1
-        className="text-[1.5rem] md:text-5xl font-cal-sans leading-snug"
+        className="text-[1.5rem] text-white text-shadow-md md:text-5xl font-cal-sans leading-snug"
         initial={{ opacity: 0, y: -15, }}
         whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.3, } }}
       >Bantu Ubah Ide <span className='italic'>'Gila-mu'</span></motion.h1>
       <motion.h1
-        className="text-3xl md:text-6xl font-cal-sans mx-0 md:-mt-3"
+        className="text-3xl md:text-6xl text-white text-shadow-md font-cal-sans mx-0 md:-mt-3"
         initial={{ opacity: 0, y: -15, }}
         whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.7, } }}
       > Jadi Realitas Sinematik</motion.h1>
       <motion.div className="flex items-start flex-row md:flex-row gap-4 -mt-1">
 
         <motion.button
-          className="bg-yellow-300 text-white text-shadow-xs px-5 py-2 rounded-full mt-4 hover:bg-yellow-400 tracking-normal hover:cursor-pointer"
+          className="bg-yellow-500 text-white text-shadow-xs px-5 py-2 rounded-full mt-4 hover:bg-yellow-600 tracking-normal hover:cursor-pointer"
           initial={{ opacity: 0, y: -15, }}
           whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 1.2, } }}
+          onClick={() => onSectionChange(3)}
         >Hubungi Kami</motion.button>
+        <motion.button
+          className="bg-white/80 text-black px-5 py-2 rounded-full mt-4 hover:bg-white tracking-normal hover:cursor-pointer"
+          initial={{ opacity: 0, y: -15, }}
+          whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 1.3, } }}
+          onClick={() => setIsExploring(!isExploring)}
+        >
+          {isExploring ? "Kembali ke Halaman" : "Jelajahi Studio"}
+        </motion.button>
       </motion.div>
     </Section>
   )
@@ -66,7 +77,7 @@ const AboutSection = () => {
         initial={{ opacity: 0, x: -15, }}
         whileInView={{ opacity: 1, x: 0, transition: { duration: 1, delay: 0.7, } }}
       >Kami Bukan Kru Video Biasa</motion.h1>
-      <div className="rounded-lg outline outline-white/5 bg-gray-950/70 p-4">
+      <div className="max-w-3xl rounded-lg outline outline-white/5 bg-gray-950/70 p-4">
         <motion.p className="text-xl/loose text-white mb-8 font-cal-sans"
           initial={{ opacity: 0, x: -15, }}
           whileInView={{ opacity: 1, x: 0, transition: { duration: 1, delay: 0.9, } }}
@@ -131,7 +142,7 @@ const ContactSection = () => {
   }
 
   return (
-    <Section alignItems="items-center">
+    <Section alignItems="items-center" className="mt-12 py-12">
       <div className="flex flex-col items-center text-center mt-8">
         <h2 className="text-4xl font-dm-serif">Siap Membuat Gebrakan?</h2>
         <p className="font-cal-sans text-lg max-w-lg">Hubungi kami, dan mari kita mulai mengubah ide-ide Anda menjadi sesuatu yang luar biasa.</p>
@@ -176,7 +187,7 @@ const ContactSection = () => {
         </div>
       </form>
 
-      <div className="mt-8 text-center">
+      <div className="mt-8 text-center pb-8">
         <p className="font-cal-sans">Atau Anda dapat menghubungi kami melalui:</p>
         <div className="flex justify-center gap-4 mt-2">
           <a href="mailto:namlapanstudios@gmail.com" target="_blank" rel="noopener noreferrer">
