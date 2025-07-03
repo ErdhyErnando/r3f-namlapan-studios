@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from 'framer-motion';
+import { colorPalette } from '../constants/projectData';
 
 const services = [
     "video production",
@@ -109,17 +110,30 @@ const PricingPage = () => {
     };
 
     return (
-        <div className="bg-gradient-to-r from-[#334155] to-[#0f172a]  text-white min-h-screen p-8 font-sans">
+        <div
+            className="text-white min-h-screen p-8 font-sans"
+            style={{
+                background: `linear-gradient(to bottom, ${colorPalette.lightTeal}, ${colorPalette.orangeYellow}, ${colorPalette.salmon}, ${colorPalette.white} 70%)`,
+            }}
+        >
             <div className="text-center mb-12">
-                <h1 className="text-4xl font-bold mb-8 font-dm-serif text-shadow-md">Simple, transparent pricing</h1>
+                <h1 className="text-4xl font-bold mb-8 font-dm-serif text-shadow-md text-black">Simple, transparent pricing</h1>
 
-                <div className="inline-grid md:grid-cols-4 grid-cols-2 flex-wrap p-2 items-center justify-center bg-[#028CAD] rounded-lg gap-2 font-cal-sans tracking-wide">
+                <div
+                    className="inline-grid md:grid-cols-4 grid-cols-2 flex-wrap p-2 items-center justify-center rounded-lg gap-2 font-cal-sans tracking-wide"
+                    style={{ backgroundColor: colorPalette.darkTeal }}
+                >
                     {services.map((service) => (
                         <button
                             key={service}
                             onClick={() => setSelectedService(service)}
-                            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors capitalize ${selectedService === service ? "bg-[#57F0DE] text-black" : "text-white/70 hover:bg-[#4D4B88]"
+                            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors capitalize ${selectedService === service
+                                ? "text-black"
+                                : "text-white/70 hover:bg-black/20"
                                 }`}
+                            style={{
+                                backgroundColor: selectedService === service ? colorPalette.orangeYellow : 'transparent'
+                            }}
                         >
                             {service}
                         </button>
@@ -137,27 +151,47 @@ const PricingPage = () => {
                 {pricingData[selectedService].map((card, index) => (
                     <motion.div
                         key={index}
-                        className={`bg-[#028CAD]  rounded-2xl p-8 flex flex-col relative ${card.popular ? "border-2 border-[#6F3AA4]" : ""
-                            }`}
+                        className={`rounded-2xl p-8 flex flex-col relative shadow-lg ${card.popular ? "border-2" : ""}`}
+                        style={{
+                            backgroundColor: colorPalette.white,
+                            color: colorPalette.black,
+                            borderColor: card.popular ? colorPalette.salmon : 'transparent'
+                        }}
                         variants={cardVariants}
                     >
                         {card.popular && (
-                            <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-[#6F3AA4] text-white text-xs font-bold px-3 py-1 rounded-full">
+                            <div
+                                className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 text-white text-xs font-bold px-3 py-1 rounded-full"
+                                style={{ backgroundColor: colorPalette.salmon }}
+                            >
                                 Most Popular
                             </div>
                         )}
                         <h3 className="text-2xl font-bold mb-2">{card.name}</h3>
-                        <p className="text-3xl font-extrabold mb-2">{card.price}<span className="text-lg font-medium text-white/50">/project</span></p>
-                        <p className="text-white/50 mb-6">Perfect for your needs.</p>
+                        <p className="text-3xl font-extrabold mb-2">{card.price}<span className="text-lg font-medium opacity-50">/project</span></p>
+                        <p className="opacity-50 mb-6">Perfect for your needs.</p>
                         <ul className="space-y-4 mb-8 flex-grow">
                             {card.features.map((feature, i) => (
                                 <li key={i} className="flex items-center">
-                                    <svg className="w-5 h-5 text-[#06D2AC] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                                    <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style={{ color: colorPalette.lightTeal }}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
                                     {feature}
                                 </li>
                             ))}
                         </ul>
-                        <button className={`w-full py-3 rounded-lg font-semibold transition-colors ${card.popular ? "bg-[#57F0DE] text-black" : "bg-[#593873] text-white hover:bg-[#6F3AA4]"}`}>
+                        <button
+                            className="w-full py-3 rounded-lg font-semibold transition-colors text-white"
+                            style={{
+                                backgroundColor: card.popular ? colorPalette.salmon : colorPalette.darkTeal,
+                            }}
+                            onMouseEnter={(e) => {
+                                e.target.style.backgroundColor = card.popular ? colorPalette.orangeYellow : colorPalette.lightTeal;
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.style.backgroundColor = card.popular ? colorPalette.salmon : colorPalette.darkTeal;
+                            }}
+                        >
                             Get started
                         </button>
                     </motion.div>
