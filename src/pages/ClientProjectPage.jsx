@@ -1,14 +1,15 @@
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import { useState } from 'react';
 import BackButton from '../components/BackButton';
 import ProgressBar from '../components/ProgressBar';
 import Gallery from '../components/Gallery';
 import Lightbox from '../components/Lightbox';
-import { allProjectsData } from '../constants/projectData';
+import { allProjectsData, colorPalette } from '../constants/projectData';
 
 const ClientProjectPage = () => {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [currentImage, setCurrentImage] = useState("");
+    const navigate = useNavigate();
 
     const openLightbox = (src) => {
         setCurrentImage(src);
@@ -24,13 +25,74 @@ const ClientProjectPage = () => {
     const project = allProjectsData.find(p => p.clientName === clientName);
 
     if (!project) {
-        return <div className="p-10 text-center">Project not found.</div>;
+        return (
+            <div
+                className="min-h-screen flex items-center justify-center p-8"
+                style={{
+                    background: `linear-gradient(to bottom, ${colorPalette.lightTeal}, ${colorPalette.orangeYellow}, ${colorPalette.salmon}, ${colorPalette.white} 70%)`,
+                }}
+            >
+                <div
+                    className="text-center p-12 rounded-2xl shadow-lg max-w-md mx-auto"
+                    style={{
+                        backgroundColor: colorPalette.white,
+                        color: colorPalette.black,
+                    }}
+                >
+                    <div className="mb-6">
+                        <h1 className="text-4xl font-bold mb-4 font-dm-serif">Oops!</h1>
+                        <h2 className="text-2xl font-semibold mb-2 font-cal-sans">Project Not Found</h2>
+                        <p className="text-md opacity-70 font-cal-sans">
+                            We couldn't find the project you're looking for. It might have been moved or doesn't exist.
+                        </p>
+                    </div>
+
+                    <div className="space-y-3">
+                        <button
+                            onClick={() => navigate('/')}
+                            className="w-full py-3 px-6 rounded-lg font-semibold transition-colors text-white font-cal-sans"
+                            style={{
+                                backgroundColor: colorPalette.salmon,
+                            }}
+                            onMouseEnter={(e) => {
+                                e.target.style.backgroundColor = colorPalette.orangeYellow;
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.style.backgroundColor = colorPalette.salmon;
+                            }}
+                        >
+                            Back to Home
+                        </button>
+
+                        <button
+                            onClick={() => navigate(-1)}
+                            className="w-full py-3 px-6 rounded-lg font-semibold transition-colors text-white font-cal-sans"
+                            style={{
+                                backgroundColor: colorPalette.darkTeal,
+                            }}
+                            onMouseEnter={(e) => {
+                                e.target.style.backgroundColor = colorPalette.lightTeal;
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.style.backgroundColor = colorPalette.darkTeal;
+                            }}
+                        >
+                            Go Back
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     return (
         <main className='flex w-full h-screen overflow-hidden font-dm-serif'>
-            {/* <div className='relative flex-grow h-screen overflow-hidden bg-gradient-to-b from-orange-400 via-pink-500 to-purple-600'> */}
-            <div className='relative flex-grow h-screen overflow-hidden bg-zinc-200'>
+            <div
+                className='relative flex-grow h-screen overflow-hidden'
+                style={{
+                    background: `linear-gradient(to bottom, ${colorPalette.lightTeal}, ${colorPalette.orangeYellow}, ${colorPalette.salmon}, ${colorPalette.white} 70%)`,
+                }}
+            >
                 <BackButton />
                 <ProgressBar />
                 <Gallery openLightbox={openLightbox} project={project} />

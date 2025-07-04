@@ -73,11 +73,11 @@ const AboutSection = () => {
 
   return (
     <Section alignItems="items-center" className="text-justify">
-      <motion.h1 className="text-5xl font-medium text-center my-6 font-dm-serif"
+      <motion.h1 className="text-5xl font-medium text-center my-4 font-dm-serif"
         initial={{ opacity: 0, x: -15, }}
         whileInView={{ opacity: 1, x: 0, transition: { duration: 1, delay: 0.7, } }}
       >Kami Bukan Kru Video Biasa</motion.h1>
-      <div className="max-w-3xl rounded-lg outline outline-white/5 bg-gray-950/70 p-4">
+      <div className="max-w-3xl rounded-lg outline outline-white/5 bg-black/50 p-4 backdrop-blur-md">
         <motion.p className="text-xl/loose text-white mb-8 font-cal-sans"
           initial={{ opacity: 0, x: -15, }}
           whileInView={{ opacity: 1, x: 0, transition: { duration: 1, delay: 0.9, } }}
@@ -142,7 +142,7 @@ const ContactSection = () => {
   }
 
   return (
-    <Section alignItems="items-center" className="mt-12 py-12">
+    <Section alignItems="items-center" className="mt-8 py-8">
       <div className="flex flex-col items-center text-center mt-8">
         <h2 className="text-4xl font-dm-serif">Siap Membuat Gebrakan?</h2>
         <p className="font-cal-sans text-lg max-w-lg">Hubungi kami, dan mari kita mulai mengubah ide-ide Anda menjadi sesuatu yang luar biasa.</p>
@@ -183,7 +183,7 @@ const ContactSection = () => {
           ></textarea>
         </div>
         <div className="flex justify-center">
-          <button type="submit" className="bg-yellow-300 text-white px-6 py-2 rounded-full hover:bg-yellow-500 w-full md:w-auto">Kirim</button>
+          <button type="submit" className="bg-yellow-300 text-white px-6 py-2 rounded-full hover:bg-yellow-500 w-full md:w-auto cursor-pointer">Kirim</button>
         </div>
       </form>
 

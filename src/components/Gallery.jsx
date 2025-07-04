@@ -1,5 +1,6 @@
 import { useEffect, useRef, useMemo } from "react";
 import { motion } from "framer-motion";
+import { colorPalette } from "../constants/projectData";
 
 const Gallery = ({ openLightbox, project }) => {
     const galleryContainerRef = useRef(null);
@@ -89,14 +90,23 @@ const Gallery = ({ openLightbox, project }) => {
             className="gallery-container flex overflow-x-scroll overflow-y-hidden whitespace-nowrap h-screen"
         >
             <div className="gallery flex justify-start min-w-max p-5 h-full items-center">
-                <div className="p-10 flex flex-col justify-center text-blue-900 mr-24 flex-shrink-0 w-[320px] sm:w-[420px] md:w-[520px] lg:w-[620px]">
-                    <h1 className="text-2xl md:text-4xl font-bold mb-4 text-blue-900 whitespace-normal">
+                <div className="p-10 flex flex-col justify-center mr-24 flex-shrink-0 w-[320px] sm:w-[420px] md:w-[520px] lg:w-[620px]">
+                    <h1 
+                        className="text-2xl md:text-4xl font-bold mb-4 whitespace-normal font-dm-serif"
+                        style={{ color: colorPalette.black }}
+                    >
                         {project.title}
                     </h1>
-                    <p className="text-lg mb-2 whitespace-normal text-blue-900">
+                    <p 
+                        className="text-lg mb-2 whitespace-normal font-cal-sans"
+                        style={{ color: colorPalette.darkTeal }}
+                    >
                         {project.details}
                     </p>
-                    <p className="text-md whitespace-normal text-blue-900">
+                    <p 
+                        className="text-md whitespace-normal font-cal-sans opacity-80"
+                        style={{ color: colorPalette.darkTeal }}
+                    >
                         Geser ke Kanan untuk melihat lebih banyak
                     </p>
                 </div>
@@ -108,28 +118,40 @@ const Gallery = ({ openLightbox, project }) => {
                                 key={index}
                                 src={item.src}
                                 alt={`Gallery Image ${index + 1}`}
-                                className="gallery-image rounded-lg shadow-md transition-transform hover:scale-102 cursor-pointer mr-4"
+                                className="gallery-image rounded-lg transition-transform hover:scale-102 cursor-pointer mr-4"
                                 style={{
                                     maxHeight: `${item.randomHeight}vh`,
                                     alignSelf: item.randomAlignment,
+                                    boxShadow: `0 4px 20px rgba(0, 0, 0, 0.1)`,
                                 }}
                                 onClick={() => openLightbox(item.src)}
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
+                                whileHover={{ 
+                                    scale: 1.05,
+                                    boxShadow: `0 8px 30px rgba(0, 0, 0, 0.15)`,
+                                }}
+                                transition={{ type: "spring", stiffness: 300, damping: 20 }}
                             />
                         );
                     } else if (item.type === "youtube") {
                         return (
                             <motion.div
                                 key={index}
-                                className="gallery-video rounded-lg shadow-md mr-4 overflow-hidden"
+                                className="gallery-video rounded-lg mr-4 overflow-hidden"
                                 style={{
                                     height: `${item.randomHeight}vh`,
                                     width: `${item.randomHeight * 1.77}vh`,
                                     alignSelf: item.randomAlignment,
+                                    boxShadow: `0 4px 20px rgba(0, 0, 0, 0.1)`,
                                 }}
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
+                                whileHover={{ 
+                                    scale: 1.02,
+                                    boxShadow: `0 8px 30px rgba(0, 0, 0, 0.15)`,
+                                }}
+                                transition={{ type: "spring", stiffness: 300, damping: 20 }}
                             >
                                 <iframe
                                     src={item.src}
