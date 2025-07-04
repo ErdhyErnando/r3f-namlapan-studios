@@ -3,83 +3,90 @@ import { motion } from 'framer-motion';
 import { colorPalette } from '../constants/projectData';
 
 const services = [
-    "video production",
-    "video editing",
-    "documentation",
-    "photoshoot",
+    "produksi video",
+    "penyuntingan video",
+    "dokumentasi",
+    "sesi foto",
 ];
 
+const servicesDescriptions = {
+    "produksi video": "Layanan Produksi Video mulai dari penulisan naskah, pengambilan gambar, hingga penyuntingan.",
+    "penyuntingan video": "Kami mengubah rekaman mentah Anda menjadi produk akhir yang berkualitas.",
+    "dokumentasi": "Abadikan acara Anda dengan layanan dokumentasi video dan fotografi kami.",
+    "sesi foto": "Hasilkan gambar-gambar memukau untuk acara atau merek Anda dengan layanan sesi foto profesional kami.",
+}
+
 const pricingData = {
-    "video production": [
+    "produksi video": [
         {
             name: "The First Take",
             price: "IDR 3.299.000",
-            features: ["Discovery Call, Concept Development, Strategy Session", "Up to 2-3 minute Video", "Up to 6-hours of shoot", "1 Location", "1x Major Revision", "1x Minor Revision"],
+            features: ["Panggilan Penemuan, Pengembangan Konsep, Sesi Strategi", "Video hingga 2-3 menit", "Pengambilan gambar hingga 6 jam", "1 Lokasi", "1x Revisi Mayor", "1x Revisi Minor"],
         },
         {
             name: "The Director's Cut",
             price: "IDR 5.799.000",
-            features: ["Discovery Call, Concept Development, Strategy Session", "Up to 5-10 Minute Video", "Up to 8-hours of shoot", "Up to 2 Location", "2x Major Revision", "2x Minor Revision"],
+            features: ["Panggilan Penemuan, Pengembangan Konsep, Sesi Strategi", "Video hingga 5-10 menit", "Pengambilan gambar hingga 8 jam", "Hingga 2 Lokasi", "2x Revisi Mayor", "2x Revisi Minor"],
             popular: true,
         },
         {
             name: "The Studio Premiere",
-            price: "Custom",
-            features: ["Full Custom Pre-Production", "Custom Video Length", "Custom Shooting Schedule", "Multiple Locations", "Multiple Revisions"],
+            price: "Kustom",
+            features: ["Pra-Produksi Kustom Penuh", "Durasi Video Kustom", "Jadwal Pengambilan Gambar Kustom", "Banyak Lokasi", "Revisi Berulang"],
         },
     ],
-    "video editing": [
+    "penyuntingan video": [
         {
             name: "Assembly Edit",
             price: "IDR 799.000",
-            features: ["Up to 30 minutes RAW footage", "Color Correction and Grading", "Royalty-Free Music", "1x Revision"],
+            features: ["Rekaman mentah hingga 30 menit", "Koreksi dan Grading Warna", "Musik Bebas Royalti", "1x Revisi"],
         },
         {
             name: "Picture Lock Polish",
             price: "IDR 1.699.000",
-            features: ["Up to 90 minutes RAW footage", "Color Correction and Grading", "Simple Motion Graphics", "Royalty-Free Music", "3x Revision"],
+            features: ["Rekaman mentah hingga 90 menit", "Koreksi dan Grading Warna", "Grafik Gerak Sederhana", "Musik Bebas Royalti", "3x Revisi"],
             popular: true,
         },
         {
             name: "Hollywood Finish",
-            price: "Custom",
-            features: ["Custom Scope (multi-cam, long form, etc)", "Advance Grading", "Custom Motion Graphics", "Multiple Revisions",],
+            price: "Kustom",
+            features: ["Cakupan Kustom (multi-kamera, format panjang, dll)", "Grading Tingkat Lanjut", "Grafik Gerak Kustom", "Revisi Berulang",],
         },
     ],
-    documentation: [
+    dokumentasi: [
         {
             name: "The Screen Test",
             price: "IDR 4.999.000",
-            features: ["Up to 4 hours of shooting", "Single Location", "Up to 3 minute video", "25 Edited Photos", "1x Major Revision"],
+            features: ["Pengambilan gambar hingga 4 jam", "Satu Lokasi", "Video hingga 3 menit", "25 Foto yang Diedit", "1x Revisi Mayor"],
         },
         {
             name: "Feature Shoot",
             price: "IDR 6.999.000",
-            features: ["Up to 8 hours of shooting", "Up to 2 locations", "Up to 10 minute video", "50 Edited Photos", "2x Major Revision"],
+            features: ["Pengambilan gambar hingga 8 jam", "Hingga 2 lokasi", "Video hingga 10 menit", "50 Foto yang Diedit", "2x Revisi Mayor"],
             popular: true,
         },
         {
             name: "Red Carpet Gallery",
-            price: "Custom",
-            features: ["Custom Duration", "Multiple Locations", "Custom Video Length", "Up to 200 Edited Photos", "Multiple Revisions"],
+            price: "Kustom",
+            features: ["Durasi Kustom", "Banyak Lokasi", "Panjang Video Kustom", "Hingga 200 Foto yang Diedit", "Revisi Berulang"],
         },
     ],
-    photoshoot: [
+    "sesi foto": [
         {
             name: "Spark Session",
             price: "IDR 1.499.000",
-            features: ["Up to 4 hours of shooting", "Single Location", "25 edited photos"],
+            features: ["Pengambilan gambar hingga 4 jam", "Satu Lokasi", "25 foto yang diedit"],
         },
         {
             name: "Spotlight Story",
             price: "IDR 3.199.000",
-            features: ["Up to 8 hours of shooting", "Up to 2 Locations", "70 edited photos"],
+            features: ["Pengambilan gambar hingga 8 jam", "Hingga 2 Lokasi", "70 foto yang diedit"],
             popular: true,
         },
         {
             name: "Luminary Collection",
-            price: "Custom",
-            features: ["Custom Duration", "Multiple Locations", "Up to 200 edited photos"],
+            price: "Kustom",
+            features: ["Durasi Kustom", "Banyak Lokasi", "Hingga 200 foto yang diedit"],
         },
     ],
 };
@@ -117,7 +124,7 @@ const PricingPage = () => {
             }}
         >
             <div className="text-center mb-12">
-                <h1 className="text-4xl font-bold mb-8 font-dm-serif text-shadow-md text-black">Simple, transparent pricing</h1>
+                <h1 className="text-4xl font-bold mb-8 font-dm-serif text-shadow-md text-black">Harga sederhana dan transparan</h1>
 
                 <div
                     className="inline-grid md:grid-cols-4 grid-cols-2 flex-wrap p-2 items-center justify-center rounded-lg gap-2 font-cal-sans tracking-wide"
@@ -168,8 +175,7 @@ const PricingPage = () => {
                             </div>
                         )}
                         <h3 className="text-2xl font-bold mb-2">{card.name}</h3>
-                        <p className="text-3xl font-extrabold mb-2">{card.price}<span className="text-lg font-medium opacity-50">/project</span></p>
-                        <p className="opacity-50 mb-6">Perfect for your needs.</p>
+                        <p className="text-3xl font-extrabold mb-2">{card.price}<span className="text-lg font-medium opacity-50">/proyek</span></p>
                         <ul className="space-y-4 mb-8 flex-grow">
                             {card.features.map((feature, i) => (
                                 <li key={i} className="flex items-center">
@@ -192,7 +198,7 @@ const PricingPage = () => {
                                 e.target.style.backgroundColor = card.popular ? colorPalette.salmon : colorPalette.darkTeal;
                             }}
                         >
-                            Get started
+                            Mulai
                         </button>
                     </motion.div>
                 ))}
