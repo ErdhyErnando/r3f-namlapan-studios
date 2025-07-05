@@ -2,12 +2,35 @@ export const allProjectsData = [
     {
         type: 'video',
         src: 'https://youtu.be/COVNdlad_6Y',
+        thumbnail: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/The-Bucket-List/THUMBNAIL.png',
         title: 'THE BUCKET LIST (short movie)',
-        logo: 'https://via.placeholder.com/50x50?text=Logo3',
+        logo: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/logo/namalapan-studios-logo.png',
         clientName: 'The-Bucket-List',
         details: 'A short movie by Namlapan Studios',
         gallery: [
             'https://youtu.be/COVNdlad_6Y',
+            'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/The-Bucket-List/STILL%201.jpeg',
+            'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/The-Bucket-List/STILL%202.jpeg',
+            'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/The-Bucket-List/STILL%203.jpeg',
+            'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/The-Bucket-List/STILL%204.jpeg',
+            'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/The-Bucket-List/STILL%205.jpg',
+            'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/The-Bucket-List/STILL%206.jpg',
+        ]
+    },
+    {
+        type: 'video',
+        src: '',
+        thumbnail: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/Gema-Neoterra/THUMBNAIL.png',
+        title: 'Gema Neoterra (short movie)',
+        logo: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/logo/namalapan-studios-logo.png',
+        clientName: 'Gema-Neoterra',
+        details: 'A short movie by Namlapan Studios',
+        gallery: [
+            'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/Gema-Neoterra/still-01.jpg',
+            'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/Gema-Neoterra/still-02.jpg',
+            'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/Gema-Neoterra/still-03.jpg',
+            'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/Gema-Neoterra/still-04.jpg',
+            'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/Gema-Neoterra/still-05.jpg',
         ]
     },
     {
@@ -25,7 +48,7 @@ export const allProjectsData = [
         type: 'video',
         src: 'https://youtu.be/3hiAGUn0Jow',
         title: 'Inspira Fest Shabu Baru',
-        logo: 'https://via.placeholder.com/50x50?text=Logo3',
+        logo: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/logo/shabu-baru-logo.webp',
         clientName: 'Inspira-Fest-Shabu-Baru',
         details: 'Promotional video for Shabu Baru at Inspira Fest 2024.',
         gallery: [
@@ -36,7 +59,7 @@ export const allProjectsData = [
         type: 'video',
         src: 'https://youtu.be/dYIR5W2xHI0',
         title: 'STARGEN Company Profile',
-        logo: 'https://via.placeholder.com/50x50?text=Logo3',
+        logo: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/logo/stargen-logo.png',
         clientName: 'STARGEN',
         details: 'Company Profile video for STARGEN.',
         gallery: [
@@ -47,7 +70,7 @@ export const allProjectsData = [
         type: 'video',
         src: 'https://youtube.com/shorts/xrU5fOcxO4w?feature=share',
         title: 'Wondr by BNI',
-        logo: 'https://via.placeholder.com/50x50?text=Logo3',
+        logo: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/logo/wondrbybni-logo.png',
         clientName: 'BNI',
         details: 'Short Video for Wondr by BNI',
         gallery: [

@@ -68,7 +68,7 @@ const Gallery = ({ openLightbox, project }) => {
                     type: "youtube",
                     src: `https://www.youtube.com/embed/${videoId}`,
                 };
-            } else if (url.match(/\.(jpeg|jpg|gif|png)$/)) {
+            } else if (url.match(/\.(jpeg|jpg|gif|png|jpeg)$/)) {
                 return { type: "image", src: url };
             } else {
                 return { type: "video", src: url };
@@ -91,19 +91,19 @@ const Gallery = ({ openLightbox, project }) => {
         >
             <div className="gallery flex justify-start min-w-max p-5 h-full items-center">
                 <div className="p-10 flex flex-col justify-center mr-24 flex-shrink-0 w-[320px] sm:w-[420px] md:w-[520px] lg:w-[620px]">
-                    <h1 
+                    <h1
                         className="text-2xl md:text-4xl font-bold mb-4 whitespace-normal font-dm-serif"
                         style={{ color: colorPalette.black }}
                     >
                         {project.title}
                     </h1>
-                    <p 
+                    <p
                         className="text-lg mb-2 whitespace-normal font-cal-sans"
                         style={{ color: colorPalette.darkTeal }}
                     >
                         {project.details}
                     </p>
-                    <p 
+                    <p
                         className="text-md whitespace-normal font-cal-sans opacity-80"
                         style={{ color: colorPalette.darkTeal }}
                     >
@@ -118,7 +118,7 @@ const Gallery = ({ openLightbox, project }) => {
                                 key={index}
                                 src={item.src}
                                 alt={`Gallery Image ${index + 1}`}
-                                className="gallery-image rounded-lg transition-transform hover:scale-102 cursor-pointer mr-4"
+                                className="gallery-image rounded-lg transition-transform  cursor-pointer mr-4"
                                 style={{
                                     maxHeight: `${item.randomHeight}vh`,
                                     alignSelf: item.randomAlignment,
@@ -127,8 +127,8 @@ const Gallery = ({ openLightbox, project }) => {
                                 onClick={() => openLightbox(item.src)}
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
-                                whileHover={{ 
-                                    scale: 1.05,
+                                whileHover={{
+                                    scale: 1.01,
                                     boxShadow: `0 8px 30px rgba(0, 0, 0, 0.15)`,
                                 }}
                                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -147,7 +147,7 @@ const Gallery = ({ openLightbox, project }) => {
                                 }}
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
-                                whileHover={{ 
+                                whileHover={{
                                     scale: 1.02,
                                     boxShadow: `0 8px 30px rgba(0, 0, 0, 0.15)`,
                                 }}

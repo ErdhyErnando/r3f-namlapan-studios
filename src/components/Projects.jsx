@@ -48,20 +48,11 @@ const ProjectsCarousel = ({ items }) => {
                 >
                     <div className="bg-white p-3 sm:p-4 md:p-5 pb-10 sm:pb-12 md:pb-16 shadow-lg rounded-lg">
                         <a href={`/project/${item.clientName}`} target="_blank" rel="noopener noreferrer" className="w-full h-full flex flex-col">
-                            {item.type === 'image' ? (
-                                <img
-                                    src={item.src}
-                                    alt={item.title}
-                                    className="w-full h-[150px] sm:h-[200px] md:h-[250px] object-cover rounded-t-lg"
-                                />
-                            ) : (
-                                <video
-                                    className="w-full h-[150px] sm:h-[200px] md:h-[250px] bg-black rounded-t-lg"
-                                    autoPlay loop muted playsInline
-                                >
-                                    <source src={item.src} type="video/mp4" />
-                                </video>
-                            )}
+                            <img
+                                src={item.thumbnail || item.src}
+                                alt={item.title}
+                                className="w-full h-[150px] sm:h-[200px] md:h-[250px] object-cover rounded-lg"
+                            />
                             <div className="mt-3 md:mt-4 font-cal-sans text-md sm:text-lg md:text-xl text-start text-black">
                                 {item.title}
                             </div>
@@ -70,7 +61,7 @@ const ProjectsCarousel = ({ items }) => {
                             <img
                                 src={item.logo}
                                 alt={`${item.clientName} logo`}
-                                className="w-full h-full object-contain"
+                                className="w-full h-full rounded-full object-contain"
                             />
                         </div>
                     </div>
