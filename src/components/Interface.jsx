@@ -8,9 +8,10 @@ const Section = (props) => {
   const { children, alignItems = 'items-start' } = props
 
   return (
-    <motion.section className={`min-h-screen w-screen p-8 max-w-screen-2xl mx-auto flex flex-col ${alignItems} justify-center`}
+    <motion.section className={`min-h-screen w-screen p-4 sm:p-8 max-w-screen-2xl mx-auto flex flex-col ${alignItems} justify-center`}
       initial={{ opacity: 0, y: 50, }}
       whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.6, } }}
+      style={{ minHeight: '100svh' }}
     >
       {children}
     </motion.section>
@@ -142,12 +143,12 @@ const ContactSection = () => {
   }
 
   return (
-    <Section alignItems="items-center" className="mt-8 py-8">
+    <Section alignItems="items-center" className="mt-8 py-8 pb-16 sm:pb-8">
       <div className="flex flex-col items-center text-center mt-8">
-        <h2 className="text-4xl font-dm-serif">Siap Membuat Gebrakan?</h2>
-        <p className="font-cal-sans text-lg max-w-lg">Hubungi kami, dan mari kita mulai mengubah ide-ide Anda menjadi sesuatu yang luar biasa.</p>
+        <h2 className="text-3xl sm:text-4xl font-dm-serif">Siap Membuat Gebrakan?</h2>
+        <p className="font-cal-sans sm:text-lg max-w-lg px-4">Hubungi kami, dan mari kita mulai mengubah ide-ide Anda menjadi sesuatu yang luar biasa.</p>
       </div>
-      <form className="w-full max-w-2xl" onSubmit={onSubmit}>
+      <form className="w-full max-w-2xl px-4" onSubmit={onSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div className="flex flex-col">
             <label htmlFor="name" className="mb-1 font-cal-sans">Nama:</label>
@@ -187,14 +188,14 @@ const ContactSection = () => {
         </div>
       </form>
 
-      <div className="mt-8 text-center pb-8">
-        <p className="font-cal-sans">Atau Anda dapat menghubungi kami melalui:</p>
-        <div className="flex justify-center gap-4 mt-2">
+      <div className="mt-4 sm:mt-8 text-center pb-8 sm:pb-16">
+        <p className="font-cal-sans text-sm sm:text-base px-4">Atau Anda dapat menghubungi kami melalui:</p>
+        <div className="flex justify-center gap-4 sm:gap-6 mt-4 px-4">
           <a href="mailto:namlapanstudios@gmail.com" target="_blank" rel="noopener noreferrer">
             <HiOutlineMailOpen className="text-3xl  cursor-pointer hover:text-yellow-600 transition-colors" />
           </a>
           <a href="https://wa.me/+628568991707" target="_blank" rel="noopener noreferrer">
-            <BsWhatsapp className="text-3xl  cursor-pointer hover:text-yellow-600 transition-colors" />
+            <BsWhatsapp className="text-3xl sm:text-4xl  cursor-pointer hover:text-yellow-600 transition-colors" />
           </a>
         </div>
       </div>

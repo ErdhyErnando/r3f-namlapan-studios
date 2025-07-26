@@ -68,7 +68,7 @@ const Gallery = ({ openLightbox, project }) => {
                     type: "youtube",
                     src: `https://www.youtube.com/embed/${videoId}`,
                 };
-            } else if (url.match(/\.(jpeg|jpg|gif|png|jpeg)$/)) {
+            } else if (url.match(/\.(jpeg|jpg|gif|png|jpeg|webp)$/i)) {
                 return { type: "image", src: url };
             } else {
                 return { type: "video", src: url };
