@@ -36,6 +36,7 @@ export const allProjectsData = [
     {
         type: 'video',
         src: 'https://youtube.com/shorts/Ndd4oplOlxY',
+        thumbnail: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/YT-Short-Comp/THUMBNAIL.webp',
         title: '7707 Youtube Shorts Video Contest',
         logo: 'https://via.placeholder.com/50x50?text=Logo3',
         clientName: '7707-YouTube-Shorts-Video-Contest',
@@ -89,7 +90,7 @@ export const allProjectsData = [
         src: 'https://youtube.com/shorts/xrU5fOcxO4w?feature=share',
         thumbnail: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/Ojk/THUMBNAIL.webp',
         title: 'OJK',
-        logo: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/logo/wondrbybni-logo.png',
+        logo: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/logo/logo-ojk.webp',
         clientName: 'OJK',
         details: 'Short Video for OJK',
         gallery: [
@@ -106,13 +107,26 @@ export const allProjectsData = [
     {
         type: 'video',
         src: 'https://youtube.com/shorts/xrU5fOcxO4w?feature=share',
+        thumbnail: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/WONDR/THUMBNAIL.webp',
         title: 'Wondr by BNI',
-        logo: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/logo/wondrbybni-logo.png',
+        logo: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/logo/wondrbybni-logo.webp',
         clientName: 'BNI',
         details: 'Short Video for Wondr by BNI',
         gallery: [
             'https://youtube.com/shorts/xrU5fOcxO4w?feature=share',
             'https://youtube.com/shorts/_x3r8mibGfY',
+        ]
+    },
+    {
+        type: 'video',
+        src: 'https://youtu.be/AJiV959pgAY?si=V7iHBRbz9P-0tm6u',
+        thumbnail: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/Dreamity-Indonesia/THUMBNAIL.webp',
+        title: 'Profil Komunitas Dreamity Indonesia',
+        logo: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/logo/dreamity-logo.webp',
+        clientName: 'BNI',
+        details: 'Video Profil Komunitas Dreamity Indonesia',
+        gallery: [
+            'https://www.youtube.com/watch?v=AJiV959pgAY'
         ]
     },
     // {
@@ -126,22 +140,22 @@ export const allProjectsData = [
     //         'https://images.pexels.com/photos/31831861/pexels-photo-31831861/free-photo-of-lone-hiker-on-cliff-at-sunrise-in-mountain-range.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
     //     ]
     // },
-    {
-        type: 'image',
-        src: 'https://pub-e54c94b2502642d69cab5d6cd5d70cee.r2.dev/luffy-1.png',
-        title: 'Luffy',
-        logo: 'https://via.placeholder.com/50x50?text=Logo6',
-        clientName: 'luffy',
-        details: 'A project about Luffy.',
-        gallery: [
-            'https://pub-e54c94b2502642d69cab5d6cd5d70cee.r2.dev/luffy-1.png',
-            'https://cdn.oneesports.gg/cdn-data/2024/02/Anime_MonkeyDLuffy.jpg',
-            'https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/08/one-piece-luffy-gear-5-eyes-pop-out-cropped.jpg',
-            'https://www.thepopverse.com/_next/image?url=https%3A%2F%2Fmedia.thepopverse.com%2Fmedia%2Fluffy-gear-5-eyes-and-smiling-g3aldq0s12hfhnfhqgldqcg4py.jpg&w=1280&q=75',
-            'https://comicbook.com/wp-content/uploads/sites/4/2024/04/a7aafa1a-295d-4cb7-b5c1-c9a6a6a5dfb7.jpg'
+    // {
+    //     type: 'image',
+    //     src: 'https://pub-e54c94b2502642d69cab5d6cd5d70cee.r2.dev/luffy-1.png',
+    //     title: 'Luffy',
+    //     logo: 'https://via.placeholder.com/50x50?text=Logo6',
+    //     clientName: 'luffy',
+    //     details: 'A project about Luffy.',
+    //     gallery: [
+    //         'https://pub-e54c94b2502642d69cab5d6cd5d70cee.r2.dev/luffy-1.png',
+    //         'https://cdn.oneesports.gg/cdn-data/2024/02/Anime_MonkeyDLuffy.jpg',
+    //         'https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/08/one-piece-luffy-gear-5-eyes-pop-out-cropped.jpg',
+    //         'https://www.thepopverse.com/_next/image?url=https%3A%2F%2Fmedia.thepopverse.com%2Fmedia%2Fluffy-gear-5-eyes-and-smiling-g3aldq0s12hfhnfhqgldqcg4py.jpg&w=1280&q=75',
+    //         'https://comicbook.com/wp-content/uploads/sites/4/2024/04/a7aafa1a-295d-4cb7-b5c1-c9a6a6a5dfb7.jpg'
 
-        ]
-    },
+    //     ]
+    // },
 ];
 
 export const colorPalette = {
