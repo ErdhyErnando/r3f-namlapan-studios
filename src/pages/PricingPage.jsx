@@ -95,6 +95,13 @@ const pricingData = {
 const PricingPage = () => {
     const [selectedService, setSelectedService] = useState(services[0]);
 
+    // Add WhatsApp configuration
+    const whatsappNumber = "628568991707"; // Replace with your actual WhatsApp number
+    const getWhatsAppLink = (serviceName, planName) => {
+        const message = `Halo! Saya tertarik dengan paket ${planName} untuk layanan ${serviceName}.`;
+        return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    };
+
     const containerVariants = {
         hidden: { opacity: 1 },
         visible: {
@@ -186,8 +193,12 @@ const PricingPage = () => {
                                 </li>
                             ))}
                         </ul>
-                        <button
-                            className="w-full py-3 rounded-lg font-semibold transition-colors text-white"
+                        {/* Replace the button with an anchor tag */}
+                        <a
+                            href={getWhatsAppLink(selectedService, card.name)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full py-3 rounded-lg font-semibold transition-colors text-white text-center block"
                             style={{
                                 backgroundColor: card.popular ? colorPalette.salmon : colorPalette.darkTeal,
                             }}
@@ -199,7 +210,7 @@ const PricingPage = () => {
                             }}
                         >
                             Mulai
-                        </button>
+                        </a>
                     </motion.div>
                 ))}
             </motion.div>

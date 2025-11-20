@@ -29,3 +29,6 @@ models
 # env
 .env
 .env.*
+
+# random docs
+R2_SETUP.md

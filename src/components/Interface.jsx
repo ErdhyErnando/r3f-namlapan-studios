@@ -1,35 +1,45 @@
-import { motion } from 'framer-motion';
-import Projects from './Projects';
-import toast from 'react-hot-toast';
-import { HiOutlineMailOpen } from 'react-icons/hi';
-import { BsWhatsapp } from 'react-icons/bs';
+import { motion } from "framer-motion";
+import Projects from "./Projects";
+import toast from "react-hot-toast";
+import { HiOutlineMailOpen } from "react-icons/hi";
+import { BsWhatsapp } from "react-icons/bs";
 
 const Section = (props) => {
-  const { children, alignItems = 'items-start' } = props
+  const { children, alignItems = "items-start" } = props;
 
   return (
-    <motion.section className={`min-h-screen w-screen p-4 sm:p-8 max-w-screen-2xl mx-auto flex flex-col ${alignItems} justify-center`}
-      initial={{ opacity: 0, y: 50, }}
-      whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.6, } }}
-      style={{ minHeight: '100svh' }}
+    <motion.section
+      className={`min-h-screen w-screen p-4 sm:p-8 max-w-screen-2xl mx-auto flex flex-col ${alignItems} justify-center`}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        transition: { duration: 1, delay: 0.6 },
+      }}
+      style={{ minHeight: "100svh" }}
     >
       {children}
     </motion.section>
-
-  )
-}
+  );
+};
 
 export const Interface = (props) => {
   const { onSectionChange, isExploring, setIsExploring } = props;
-  return <div className="flex flex-col items-center w-screen">
-    <HeroSection onSectionChange={onSectionChange} isExploring={isExploring} setIsExploring={setIsExploring} />
-    <Section className="bg-gray-950/70 mt-20">
-      <Projects />
-    </Section>
-    <AboutSection />
-    <ContactSection />
-  </div>
-}
+  return (
+    <div className="flex flex-col items-center w-screen">
+      <HeroSection
+        onSectionChange={onSectionChange}
+        isExploring={isExploring}
+        setIsExploring={setIsExploring}
+      />
+      <Section className="bg-gray-950/70 mt-20">
+        <Projects />
+      </Section>
+      <AboutSection />
+      <ContactSection />
+    </div>
+  );
+};
 
 // Hero Section
 const HeroSection = (props) => {
@@ -39,68 +49,134 @@ const HeroSection = (props) => {
     <Section className="px-12 ">
       <motion.h1
         className="text-[1.5rem] text-white text-shadow-md md:text-5xl font-cal-sans leading-snug"
-        initial={{ opacity: 0, y: -15, }}
-        whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.3, } }}
-      >Bantu Ubah Ide <span className='italic'>'Gila-mu'</span></motion.h1>
+        initial={{ opacity: 0, y: -15 }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+          transition: { duration: 1, delay: 0.3 },
+        }}
+      >
+        Bantu Ubah Ide <span className="italic">'Gila-mu'</span>
+      </motion.h1>
       <motion.h1
         className="text-3xl md:text-6xl text-white text-shadow-md font-cal-sans mx-0 md:-mt-3"
-        initial={{ opacity: 0, y: -15, }}
-        whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 0.7, } }}
-      > Jadi Realitas Sinematik</motion.h1>
+        initial={{ opacity: 0, y: -15 }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+          transition: { duration: 1, delay: 0.7 },
+        }}
+      >
+        {" "}
+        Jadi Realitas Sinematik
+      </motion.h1>
       <motion.div className="flex items-start flex-row md:flex-row gap-4 -mt-1">
-
         <motion.button
           className="bg-yellow-500 text-white text-shadow-xs px-5 py-2 rounded-full mt-4 hover:bg-yellow-600 tracking-normal hover:cursor-pointer"
-          initial={{ opacity: 0, y: -15, }}
-          whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 1.2, } }}
+          initial={{ opacity: 0, y: -15 }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: { duration: 1, delay: 1.2 },
+          }}
           onClick={() => onSectionChange(3)}
-        >Hubungi Kami</motion.button>
+        >
+          Hubungi Kami
+        </motion.button>
         <motion.button
           className="bg-white/80 text-black px-5 py-2 rounded-full mt-4 hover:bg-white tracking-normal hover:cursor-pointer"
-          initial={{ opacity: 0, y: -15, }}
-          whileInView={{ opacity: 1, y: 0, transition: { duration: 1, delay: 1.3, } }}
+          initial={{ opacity: 0, y: -15 }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: { duration: 1, delay: 1.3 },
+          }}
           onClick={() => setIsExploring(!isExploring)}
         >
           {isExploring ? "Kembali ke Halaman" : "Jelajahi Studio"}
         </motion.button>
       </motion.div>
     </Section>
-  )
-}
-
+  );
+};
 
 // About Section
 const AboutSection = () => {
-
   return (
     <Section alignItems="items-center" className="text-justify">
-      <motion.h1 className="text-5xl font-medium text-center my-4 font-dm-serif"
-        initial={{ opacity: 0, x: -15, }}
-        whileInView={{ opacity: 1, x: 0, transition: { duration: 1, delay: 0.7, } }}
-      >Kami Bukan Kru Video Biasa</motion.h1>
+      <motion.h1
+        className="text-5xl font-medium text-center my-4 font-dm-serif"
+        initial={{ opacity: 0, x: -15 }}
+        whileInView={{
+          opacity: 1,
+          x: 0,
+          transition: { duration: 1, delay: 0.7 },
+        }}
+      >
+        Kami Bukan Kru Video Biasa
+      </motion.h1>
       <div className="max-w-3xl rounded-lg outline outline-white/5 bg-black/50 p-4 backdrop-blur-md">
-        <motion.p className="text-xl/loose text-white mb-8 font-cal-sans"
-          initial={{ opacity: 0, x: -15, }}
-          whileInView={{ opacity: 1, x: 0, transition: { duration: 1, delay: 0.9, } }}
+        <motion.p
+          className="text-xl/loose text-white mb-8 font-cal-sans"
+          initial={{ opacity: 0, x: -15 }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+            transition: { duration: 1, delay: 0.9 },
+          }}
         >
-          Namlapan Studios adalah tempat kreativitas bertemu dengan eksekusi tanpa rasa takut. Lahir dari kecintaan pada penceritaan dan kebencian pada hal yang membosankan,
-          <br />kami adalah tim yang hidup untuk membuat video yang memicu percakapan.
+          Di balik setiap karya NAMLAPAN, ada pikiran yang kacau-liar, jujur,
+          dan belum tersampaikan. Tapi kami percaya, justru dari kekacauan
+          itulah, cerita terbaik bisa lahir. Kami adalah ruang bagi ide-ide yang
+          tidak muat dalam kotak. Tempat di mana mimpi absurd, keresahan
+          personal, atau kegilaan visual, dijahit jadi karya nyata yang
+          menggerakan.
+          <br />
         </motion.p>
-        <motion.p className="text-xl/loose text-white mb-4 font-cal-sans"
-          initial={{ opacity: 0, x: -15, }}
-          whileInView={{ opacity: 1, x: 0, transition: { duration: 1, delay: 1, } }}
+        <motion.p
+          className="text-xl/loose text-white mb-4 font-cal-sans"
+          initial={{ opacity: 0, x: -15 }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+            transition: { duration: 1, delay: 1 },
+          }}
         >
-          Berbasis di Jabodetabek, kami memadukan semangat, jiwa, dan sentuhan unik untuk membuat setiap proyek menjadi istimewa.
-          <br />Tidak ada yang biasa-biasa saja di sini—hanya karya yang nyata, berani, dan sedikit out-of-the-box.
+          Berbasis di Jabodetabek, kami bukan sekedar Kru video. Kami adalah
+          kolaborator kreatif yang hidup untuk menciptakan video, film, dan
+          konten yang mengganggu keheningan dan memicu percakapan. Karena di
+          dunia yang terlalu rapi, sedikit kekacauan bisa jadi sebuah
+          pernyataan.
         </motion.p>
+        <motion.p
+          className="text-xl/loose text-white mb-4 font-cal-sans"
+          initial={{ opacity: 0, x: -15 }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+            transition: { duration: 1, delay: 1.1 },
+          }}
+        >
+          Turning Chaotic Minds to Realities
+          <span className="block">
+            --bukan cuman tagline. Ini cara hidup kami.
+          </span>
+        </motion.p>
+        <div className="flex justify-center items-center mt-4">
+          <a
+            href="/pricing"
+            className="rounded-full bg-yellow-500 text-white px-6 py-2 hover:bg-yellow-600 cursor-pointer"
+          >
+            Hubungi Kami
+          </a>
+        </div>
       </div>
     </Section>
-  )
-}
+  );
+};
 
 // Contact Section
 const ContactSection = () => {
-
   const onSubmit = async (event) => {
     event.preventDefault();
     toast("Mengirim...", {
@@ -140,31 +216,67 @@ const ContactSection = () => {
         },
       });
     }
-  }
+  };
 
   return (
     <Section alignItems="items-center" className="mt-8 py-8 pb-16 sm:pb-8">
       <div className="flex flex-col items-center text-center mt-8">
-        <h2 className="text-3xl sm:text-4xl font-dm-serif">Siap Membuat Gebrakan?</h2>
-        <p className="font-cal-sans sm:text-lg max-w-lg px-4">Hubungi kami, dan mari kita mulai mengubah ide-ide Anda menjadi sesuatu yang luar biasa.</p>
+        <h2 className="text-3xl sm:text-4xl font-dm-serif">
+          Siap Membuat Gebrakan?
+        </h2>
+        <p className="font-cal-sans sm:text-lg max-w-lg px-4">
+          Hubungi kami, dan mari kita mulai mengubah ide-ide Anda menjadi
+          sesuatu yang luar biasa.
+        </p>
       </div>
       <form className="w-full max-w-2xl px-4" onSubmit={onSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div className="flex flex-col">
-            <label htmlFor="name" className="mb-1 font-cal-sans">Nama:</label>
-            <input type="text" id="name" name="name" placeholder="Nama Anda" className="p-2 rounded-md outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500" required />
+            <label htmlFor="name" className="mb-1 font-cal-sans">
+              Nama:
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Nama Anda"
+              className="p-2 rounded-md outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500"
+              required
+            />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="phone" className="mb-1 font-cal-sans">Nomor Telepon:</label>
-            <input type="tel" id="phone" name="phone" placeholder="Nomor Anda" className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500" />
+            <label htmlFor="phone" className="mb-1 font-cal-sans">
+              Nomor Telepon:
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="Nomor Anda"
+              className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500"
+            />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="email" className="mb-1 font-cal-sans" required>Email:</label>
-            <input type="email" id="email" name="email" placeholder="Alamat email Anda" className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500" />
+            <label htmlFor="email" className="mb-1 font-cal-sans" required>
+              Email:
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Alamat email Anda"
+              className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500"
+            />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="source" className="mb-1 font-cal-sans">Dari mana Anda mendengar tentang kami?</label>
-            <select id="source" name="source" className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black">
+            <label htmlFor="source" className="mb-1 font-cal-sans">
+              Dari mana Anda mendengar tentang kami?
+            </label>
+            <select
+              id="source"
+              name="source"
+              className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black"
+            >
               <option value="">Pilih salah satu</option>
               <option value="social_media">Media Sosial</option>
               <option value="referral">Rekomendasi</option>
@@ -175,8 +287,12 @@ const ContactSection = () => {
           </div>
         </div>
         <div className="flex flex-col mb-4">
-          <label htmlFor="message" className="mb-1 font-cal-sans">Pesan Anda:</label>
-          <textarea id="message" name="message"
+          <label htmlFor="message" className="mb-1 font-cal-sans">
+            Pesan Anda:
+          </label>
+          <textarea
+            id="message"
+            name="message"
             placeholder="Ceritakan kepada kami, kisah apa yang ingin Anda sampaikan?"
             rows="4"
             className="p-2 rounded-lg outline outline-white/5 bg-stone-200/70 text-black placeholder:text-gray-500"
@@ -184,21 +300,36 @@ const ContactSection = () => {
           ></textarea>
         </div>
         <div className="flex justify-center">
-          <button type="submit" className="bg-yellow-300 text-white px-6 py-2 rounded-full hover:bg-yellow-500 w-full md:w-auto cursor-pointer">Kirim</button>
+          <button
+            type="submit"
+            className="bg-yellow-300 text-white px-6 py-2 rounded-full hover:bg-yellow-500 w-full md:w-auto cursor-pointer"
+          >
+            Kirim
+          </button>
         </div>
       </form>
 
       <div className="mt-4 sm:mt-8 text-center pb-8 sm:pb-16">
-        <p className="font-cal-sans text-sm sm:text-base px-4">Atau Anda dapat menghubungi kami melalui:</p>
+        <p className="font-cal-sans text-sm sm:text-base px-4">
+          Atau Anda dapat menghubungi kami melalui:
+        </p>
         <div className="flex justify-center gap-4 sm:gap-6 mt-4 px-4">
-          <a href="mailto:namlapanstudios@gmail.com" target="_blank" rel="noopener noreferrer">
+          <a
+            href="mailto:namlapanstudios@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <HiOutlineMailOpen className="text-3xl  cursor-pointer hover:text-yellow-600 transition-colors" />
           </a>
-          <a href="https://wa.me/+628568991707" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://wa.me/+628568991707"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <BsWhatsapp className="text-3xl sm:text-4xl  cursor-pointer hover:text-yellow-600 transition-colors" />
           </a>
         </div>
       </div>
     </Section>
-  )
-}
+  );
+};
