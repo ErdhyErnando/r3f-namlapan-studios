@@ -7,7 +7,9 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 
 export function PhotoStudio(props) {
-  const { nodes, materials } = useGLTF('/models/PhotoStudioOke.glb')
+  // Update to your R2 bucket public URL
+  const modelUrl = import.meta.env.VITE_PHOTO_STUDIO_MODEL_URL || '/models/PhotoStudioOke.glb';
+  const { nodes, materials } = useGLTF(modelUrl)
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.Floor.geometry} material={materials.Floor} rotation={[-Math.PI, 0, 0]} scale={[-5.047, -1, -4.454]} />
@@ -76,4 +78,6 @@ export function PhotoStudio(props) {
   )
 }
 
-useGLTF.preload('/models/PhotoStudioOke.glb')
+// Preload from R2 or local fallback
+const modelUrl = import.meta.env.VITE_PHOTO_STUDIO_MODEL_URL || '/models/PhotoStudioOke.glb';
+useGLTF.preload(modelUrl)

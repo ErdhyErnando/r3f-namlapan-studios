@@ -8,9 +8,9 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 
 export function NamlapanStudio(props) {
   const group = React.useRef();
-  const { nodes, materials, animations } = useGLTF(
-    "models/namlapan-studio.glb"
-  );
+  // Update to your R2 bucket public URL
+  const modelUrl = import.meta.env.VITE_MODEL_URL || "models/namlapan-studio.glb";
+  const { nodes, materials, animations } = useGLTF(modelUrl);
   const { actions } = useAnimations(animations, group);
   return (
     <group ref={group} {...props} dispose={null}>
@@ -499,4 +499,6 @@ export function NamlapanStudio(props) {
   );
 }
 
-useGLTF.preload("models/namlapan-studio.glb");
+// Preload from R2 or local fallback
+const modelUrl = import.meta.env.VITE_MODEL_URL || "models/namlapan-studio.glb";
+useGLTF.preload(modelUrl);
