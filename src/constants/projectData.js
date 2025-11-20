@@ -123,7 +123,7 @@ export const allProjectsData = [
         thumbnail: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/project/Dreamity-Indonesia/THUMBNAIL.webp',
         title: 'Profil Komunitas Dreamity Indonesia',
         logo: 'https://pub-7a350c2686724bbfae50b942b770db9b.r2.dev/logo/dreamity-logo.webp',
-        clientName: 'BNI',
+        clientName: 'Dreamity Indonesia',
         details: 'Video Profil Komunitas Dreamity Indonesia',
         gallery: [
             'https://www.youtube.com/watch?v=AJiV959pgAY'

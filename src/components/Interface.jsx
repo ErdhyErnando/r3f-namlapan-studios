@@ -128,7 +128,7 @@ const AboutSection = () => {
           Di balik setiap karya NAMLAPAN, ada pikiran yang kacau-liar, jujur,
           dan belum tersampaikan. Tapi kami percaya, justru dari kekacauan
           itulah, cerita terbaik bisa lahir. Kami adalah ruang bagi ide-ide yang
-          tidak muat dalam kontak. Tempat di mana mimpi absurd, keresahan
+          tidak muat dalam kotak. Tempat di mana mimpi absurd, keresahan
           personal, atau kegilaan visual, dijahit jadi karya nyata yang
           menggerakan.
           <br />
@@ -143,7 +143,7 @@ const AboutSection = () => {
           }}
         >
           Berbasis di Jabodetabek, kami bukan sekedar Kru video. Kami adalah
-          kolaborator kreatif yang hidup untuk mencipatakn video, film, dan
+          kolaborator kreatif yang hidup untuk menciptakan video, film, dan
           konten yang mengganggu keheningan dan memicu percakapan. Karena di
           dunia yang terlalu rapi, sedikit kekacauan bisa jadi sebuah
           pernyataan.
