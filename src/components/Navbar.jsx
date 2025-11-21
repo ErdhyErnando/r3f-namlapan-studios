@@ -4,7 +4,12 @@ import { HiOutlineMailOpen } from "react-icons/hi";
 import { BsWhatsapp } from "react-icons/bs";
 
 export const Navbar = (props) => {
-  const { onSectionChange, menuOpened, setMenuOpened } = props;
+  const { scrollToSection, menuOpened, setMenuOpened } = props;
+
+  const handleNavigate = (target) => {
+    scrollToSection(target);
+    setMenuOpened(false);
+  };
 
   return (
     <>
@@ -21,10 +26,10 @@ export const Navbar = (props) => {
       </button>
       <div className={`z-10 fixed top-0 right-0 bottom-0 bg-[#fafafa] transition-all border-dotted overflow-hidden flex flex-col ${menuOpened ? "w-80" : "w-0"}`}>
         <div className="flex-1 flex items-start justify-center flex-col gap-6 p-8">
-          <NavbarButton label="Hero" onClick={() => onSectionChange(0)} />
-          <NavbarButton label="Projects" onClick={() => onSectionChange(1)} />
-          <NavbarButton label="About" onClick={() => onSectionChange(2)} />
-          <NavbarButton label="Contact" onClick={() => onSectionChange(3)} />
+          <NavbarButton label="Hero" onClick={() => handleNavigate('hero')} />
+          <NavbarButton label="Projects" onClick={() => handleNavigate('projects')} />
+          <NavbarButton label="About" onClick={() => handleNavigate('about')} />
+          <NavbarButton label="Contact" onClick={() => handleNavigate('contact')} />
           <a href="/pricing" className="text-2xl font-bold cursor-pointer hover:text-yellow-600 transition-colors font-dm-serif tracking-wide">
             Pricing
           </a>

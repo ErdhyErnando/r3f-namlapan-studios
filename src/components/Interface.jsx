@@ -1,52 +1,76 @@
+import { forwardRef } from "react";
 import { motion } from "framer-motion";
 import Projects from "./Projects";
 import toast from "react-hot-toast";
 import { HiOutlineMailOpen } from "react-icons/hi";
 import { BsWhatsapp } from "react-icons/bs";
 
-const Section = (props) => {
-  const { children, alignItems = "items-start" } = props;
+const Section = forwardRef((props, ref) => {
+  const {
+    children,
+    alignItems = "items-start",
+    className = "",
+    sectionId,
+    style = {},
+    ...rest
+  } = props;
 
   return (
     <motion.section
-      className={`min-h-screen w-screen p-4 sm:p-8 max-w-screen-2xl mx-auto flex flex-col ${alignItems} justify-center`}
+      ref={ref}
+      data-section-id={sectionId}
+      className={`min-h-screen w-screen p-4 sm:p-8 max-w-screen-2xl mx-auto flex flex-col ${alignItems} justify-center ${className}`}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{
         opacity: 1,
         y: 0,
         transition: { duration: 1, delay: 0.6 },
       }}
-      style={{ minHeight: "100svh" }}
+      style={{ minHeight: "100svh", ...style }}
+      {...rest}
     >
       {children}
     </motion.section>
   );
-};
+});
+
+Section.displayName = "Section";
 
 export const Interface = (props) => {
-  const { onSectionChange, isExploring, setIsExploring } = props;
+  const { sectionRefs, scrollToSection, isExploring, setIsExploring } = props;
   return (
-    <div className="flex flex-col items-center w-screen">
+    <div className="flex flex-col items-center w-screen"
+      style={{
+        pointerEvents: isExploring ? 'none' : 'auto',
+        position: 'relative',
+        zIndex: 1,
+      }}
+    >
       <HeroSection
-        onSectionChange={onSectionChange}
+        scrollToSection={scrollToSection}
         isExploring={isExploring}
         setIsExploring={setIsExploring}
+        sectionRef={sectionRefs.hero}
       />
-      <Section className="bg-gray-950/70 mt-20">
+      <Section
+        ref={sectionRefs.projects}
+        sectionId="projects"
+        className="bg-gray-950/70 mt-20"
+      >
         <Projects />
       </Section>
-      <AboutSection />
-      <ContactSection />
+      <AboutSection sectionRef={sectionRefs.about} />
+      <ContactSection sectionRef={sectionRefs.contact} />
     </div>
   );
 };
 
 // Hero Section
 const HeroSection = (props) => {
-  const { onSectionChange, isExploring, setIsExploring } = props;
+  const { scrollToSection, isExploring, setIsExploring, sectionRef } = props;
 
   return (
-    <Section className="px-12 ">
+    <Section ref={sectionRef} sectionId="hero" className="px-12 ">
       <motion.h1
         className="text-[1.5rem] text-white text-shadow-md md:text-5xl font-cal-sans leading-snug"
         initial={{ opacity: 0, y: -15 }}
@@ -70,7 +94,9 @@ const HeroSection = (props) => {
         {" "}
         Jadi Realitas Sinematik
       </motion.h1>
-      <motion.div className="flex items-start flex-row md:flex-row gap-4 -mt-1">
+      <motion.div className="flex items-start flex-row md:flex-row gap-4 -mt-1"
+        style={{ pointerEvents: 'auto' }}
+      >
         <motion.button
           className="bg-yellow-500 text-white text-shadow-xs px-5 py-2 rounded-full mt-4 hover:bg-yellow-600 tracking-normal hover:cursor-pointer"
           initial={{ opacity: 0, y: -15 }}
@@ -79,7 +105,7 @@ const HeroSection = (props) => {
             y: 0,
             transition: { duration: 1, delay: 1.2 },
           }}
-          onClick={() => onSectionChange(3)}
+          onClick={() => scrollToSection('contact')}
         >
           Hubungi Kami
         </motion.button>
@@ -101,9 +127,14 @@ const HeroSection = (props) => {
 };
 
 // About Section
-const AboutSection = () => {
+const AboutSection = ({ sectionRef }) => {
   return (
-    <Section alignItems="items-center" className="text-justify">
+    <Section
+      ref={sectionRef}
+      sectionId="about"
+      alignItems="items-center"
+      className="text-justify"
+    >
       <motion.h1
         className="text-5xl font-medium text-center my-4 font-dm-serif"
         initial={{ opacity: 0, x: -15 }}
@@ -176,7 +207,7 @@ const AboutSection = () => {
 };
 
 // Contact Section
-const ContactSection = () => {
+const ContactSection = ({ sectionRef }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
     toast("Mengirim...", {
@@ -219,7 +250,12 @@ const ContactSection = () => {
   };
 
   return (
-    <Section alignItems="items-center" className="mt-8 py-8 pb-16 sm:pb-8">
+    <Section
+      ref={sectionRef}
+      sectionId="contact"
+      alignItems="items-center"
+      className="mt-8 py-8 pb-16 sm:pb-8"
+    >
       <div className="flex flex-col items-center text-center mt-8">
         <h2 className="text-3xl sm:text-4xl font-dm-serif">
           Siap Membuat Gebrakan?
