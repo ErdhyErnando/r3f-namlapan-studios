@@ -10,11 +10,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     sitemap({ hostname: 'https://namlapan.studio' }),
-    robots({
-      UserAgent: '*',
-      Allow: '/',
-      Sitemap: 'https://namlapan.studio/sitemap.xml',
-    }),
+    robots(),
   ],
   server: {
     host: true,

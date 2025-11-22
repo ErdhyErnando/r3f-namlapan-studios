@@ -91,10 +91,10 @@ const ClientProjectPage = () => {
             <Helmet>
                 <title>{`${project.clientName} - Project | Namlapan Studios`}</title>
                 <meta name="description" content={project.description} />
-                <link rel="canonical" href={`https://namlapan.studio/project/${project.clientName}`} />
+                <link rel="canonical" href={`https://namlapan.studio/project/${encodeURIComponent(project.clientName)}`} />
                 <meta property="og:title" content={`${project.clientName} - Project | Namlapan Studios`} />
                 <meta property="og:description" content={project.description} />
-                <meta property="og:url" content={`https://namlapan.studio/project/${project.clientName}`} />
+                <meta property="og:url" content={`https://namlapan.studio/project/${encodeURIComponent(project.clientName)}`} />
                 <meta property="og:image" content="https://namlapan.studio/og-image.png" />
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:title" content={`${project.clientName} - Project | Namlapan Studios`} />

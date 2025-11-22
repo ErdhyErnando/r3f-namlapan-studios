@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { colorPalette } from '../constants/projectData';
+import { Helmet } from 'react-helmet-async';
 
 const NotFoundPage = () => {
     return (
@@ -9,6 +10,10 @@ const NotFoundPage = () => {
                 background: `linear-gradient(to bottom, ${colorPalette.lightTeal}, ${colorPalette.orangeYellow}, ${colorPalette.white} 70%)`,
             }}
         >
+            <Helmet>
+                <title>Page Not Found - Namlapan Studios</title>
+                <meta name="robots" content="noindex, nofollow" />
+            </Helmet>
             <div className="max-w-md mx-auto">
                 <img src="/namlapan-favicon.svg" alt="Namlapan Studios Logo" className="h-24 w-24 mx-auto mb-8" />
                 <h1 className="text-8xl font-bold mb-4 font-dm-serif">404</h1>

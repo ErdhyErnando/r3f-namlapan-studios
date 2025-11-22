@@ -96,7 +96,7 @@ export default function App() {
     "logo": "https://namlapan.studio/namlapan-favicon.svg",
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+628568991707",
+      "telephone": "+62 856 8991 707",
       "contactType": "customer service"
     }
   };
