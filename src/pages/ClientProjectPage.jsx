@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import BackButton from '../components/BackButton';
 import ProgressBar from '../components/ProgressBar';
