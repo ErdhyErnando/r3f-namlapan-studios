@@ -8,6 +8,7 @@ import { LoadingScreen } from './components/LoadingScreen';
 import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { colorPalette } from './constants/projectData';
+import { Helmet } from 'react-helmet-async';
 
 const SECTION_IDS = ['hero', 'projects', 'about', 'contact'];
 
@@ -87,8 +88,43 @@ export default function App() {
     }
   };
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Namlapan Studios",
+    "url": "https://namlapan.studio/",
+    "logo": "https://namlapan.studio/namlapan-favicon.svg",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+62 856 8991 707",
+      "contactType": "customer service"
+    }
+  };
+
   return (
     <>
+      <Helmet>
+        <title>Namlapan Studios - Turning Crazy Ideas into Cinematic Reality</title>
+        <meta name="description" content="Namlapan Studios offers creative digital solutions including Photo & Video Creation, Editing, and Documentation." />
+        <link rel="canonical" href="https://namlapan.studio/" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://namlapan.studio/" />
+        <meta property="og:title" content="Namlapan Studios - Turning Crazy Ideas into Cinematic Reality" />
+        <meta property="og:description" content="Namlapan Studios offers creative digital solutions including Photo & Video Creation, Editing, and Documentation." />
+        <meta property="og:image" content="https://namlapan.studio/og-image.png" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://namlapan.studio/" />
+        <meta property="twitter:title" content="Namlapan Studios - Turning Crazy Ideas into Cinematic Reality" />
+        <meta property="twitter:description" content="Namlapan Studios offers creative digital solutions including Photo & Video Creation, Editing, and Documentation." />
+        <meta property="twitter:image" content="https://namlapan.studio/og-image.png" />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      </Helmet>
       <LoadingScreen started={started} setStarted={setStarted} />
       <Toaster position='top-right' reverseOrder={false} />
       <MotionConfig transition={{ type: 'spring', mass: 5, stiffness: 500, damping: 50, restDelta: 0.0001 }}>

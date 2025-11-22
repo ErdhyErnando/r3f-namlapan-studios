@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from 'framer-motion';
 import { colorPalette } from '../constants/projectData';
+import { Helmet } from "react-helmet-async";
 
 const services = [
     "produksi video",
@@ -130,6 +131,19 @@ const PricingPage = () => {
                 background: `linear-gradient(to bottom, ${colorPalette.lightTeal}, ${colorPalette.orangeYellow}, ${colorPalette.salmon}, ${colorPalette.white} 70%)`,
             }}
         >
+            <Helmet>
+                <title>Pricing - Namlapan Studios</title>
+                <meta name="description" content="Find the perfect pricing plan for your video production, editing, documentation, or photo session needs." />
+                <link rel="canonical" href="https://namlapan.studio/pricing" />
+                <meta property="og:title" content="Pricing - Namlapan Studios" />
+                <meta property="og:description" content="Find the perfect pricing plan for your video production, editing, documentation, or photo session needs." />
+                <meta property="og:url" content="https://namlapan.studio/pricing" />
+                <meta property="og:image" content="https://namlapan.studio/og-image.png" />
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:title" content="Pricing - Namlapan Studios" />
+                <meta property="twitter:description" content="Find the perfect pricing plan for your video production, editing, documentation, or photo session needs." />
+                <meta property="twitter:image" content="https://namlapan.studio/og-image.png" />
+            </Helmet>
             <div className="text-center mb-12">
                 <h1 className="text-4xl font-bold mb-8 font-dm-serif text-shadow-md text-black">Harga sederhana dan transparan</h1>
 

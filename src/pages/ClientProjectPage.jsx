@@ -1,10 +1,11 @@
-import { useParams, useNavigate } from 'react-router';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import BackButton from '../components/BackButton';
 import ProgressBar from '../components/ProgressBar';
 import Gallery from '../components/Gallery';
 import Lightbox from '../components/Lightbox';
 import { allProjectsData, colorPalette } from '../constants/projectData';
+import { Helmet } from 'react-helmet-async';
 
 const ClientProjectPage = () => {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -87,6 +88,19 @@ const ClientProjectPage = () => {
 
     return (
         <main className='flex w-full h-screen overflow-hidden font-dm-serif'>
+            <Helmet>
+                <title>{`${project.clientName} - Project | Namlapan Studios`}</title>
+                <meta name="description" content={project.description} />
+                <link rel="canonical" href={`https://namlapan.studio/project/${encodeURIComponent(project.clientName)}`} />
+                <meta property="og:title" content={`${project.clientName} - Project | Namlapan Studios`} />
+                <meta property="og:description" content={project.description} />
+                <meta property="og:url" content={`https://namlapan.studio/project/${encodeURIComponent(project.clientName)}`} />
+                <meta property="og:image" content="https://namlapan.studio/og-image.png" />
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:title" content={`${project.clientName} - Project | Namlapan Studios`} />
+                <meta property="twitter:description" content={project.description} />
+                <meta property="twitter:image" content="https://namlapan.studio/og-image.png" />
+            </Helmet>
             <div
                 className='relative flex-grow h-screen overflow-hidden'
                 style={{
