@@ -98,7 +98,7 @@ const HeroSection = (props) => {
         style={{ pointerEvents: 'auto' }}
       >
         <motion.button
-          className="bg-yellow-500 text-white text-shadow-xs px-5 py-2 rounded-full mt-4 hover:bg-yellow-600 tracking-normal hover:cursor-pointer"
+          className="bg-yellow-500 text-black text-shadow-xs px-5 py-2 rounded-full mt-4 hover:bg-yellow-600 tracking-normal hover:cursor-pointer"
           initial={{ opacity: 0, y: -15 }}
           whileInView={{
             opacity: 1,
@@ -196,7 +196,7 @@ const AboutSection = ({ sectionRef }) => {
         <div className="flex justify-center items-center mt-4">
           <a
             href="/pricing"
-            className="rounded-full bg-yellow-500 text-white px-6 py-2 hover:bg-yellow-600 cursor-pointer"
+            className="rounded-full bg-yellow-500 text-black px-6 py-2 hover:bg-yellow-600 cursor-pointer"
           >
             Hubungi Kami
           </a>
@@ -338,7 +338,7 @@ const ContactSection = ({ sectionRef }) => {
         <div className="flex justify-center">
           <button
             type="submit"
-            className="bg-yellow-300 text-white px-6 py-2 rounded-full hover:bg-yellow-500 w-full md:w-auto cursor-pointer"
+            className="bg-yellow-300 text-black px-6 py-2 rounded-full hover:bg-yellow-500 w-full md:w-auto cursor-pointer"
           >
             Kirim
           </button>
@@ -354,6 +354,7 @@ const ContactSection = ({ sectionRef }) => {
             href="mailto:namlapanstudios@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Email"
           >
             <HiOutlineMailOpen className="text-3xl  cursor-pointer hover:text-yellow-600 transition-colors" />
           </a>
@@ -361,6 +362,7 @@ const ContactSection = ({ sectionRef }) => {
             href="https://wa.me/+628568991707"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="WhatsApp"
           >
             <BsWhatsapp className="text-3xl sm:text-4xl  cursor-pointer hover:text-yellow-600 transition-colors" />
           </a>
