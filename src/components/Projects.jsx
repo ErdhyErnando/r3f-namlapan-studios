@@ -50,7 +50,7 @@ const ProjectsCarousel = ({ items }) => {
                         <a href={`/project/${item.clientName}`} target="_blank" rel="noopener noreferrer" className="w-full h-full flex flex-col">
                             <img
                                 src={item.thumbnail || item.src}
-                                alt={item.title}
+                                alt=""
                                 className="w-full h-[150px] sm:h-[200px] md:h-[250px] object-cover rounded-lg"
                             />
                             <div className="mt-3 md:mt-4 font-cal-sans text-md sm:text-lg md:text-xl text-start text-black">
@@ -70,11 +70,13 @@ const ProjectsCarousel = ({ items }) => {
 
             <div className="absolute bottom-1 md:bottom-3 flex justify-center items-center w-full">
                 <button
+                    aria-label="Previous Project"
                     className="bg-black/50 text-white border-none w-10 h-10 sm:w-12 sm:h-12 rounded-full text-lg sm:text-xl cursor-pointer hover:bg-black/80 transition-colors mx-2"
                     onClick={prevProject}>
                     &larr;
                 </button>
                 <button
+                    aria-label="Next Project"
                     className="bg-black/50 text-white border-none w-10 h-10 sm:w-12 sm:h-12 rounded-full text-lg sm:text-xl cursor-pointer hover:bg-black/80 transition-colors mx-2"
                     onClick={nextProject}>
                     &rarr;
