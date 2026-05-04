@@ -7,12 +7,18 @@ export const LoadingScreen = (props) => {
     const { progress, total, loaded, item } = useProgress();
 
     useEffect(() => {
+        const fallbackTimer = setTimeout(() => {
+            setStarted(true);
+        }, 1400);
+
         if (progress === 100) {
             setTimeout(() => {
                 setStarted(true);
             }, 500);
         }
-    }, [progress, total, loaded, item]);
+
+        return () => clearTimeout(fallbackTimer);
+    }, [progress, total, loaded, item, setStarted]);
 
     return (
         <div

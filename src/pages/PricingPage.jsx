@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { motion } from 'framer-motion';
-import { colorPalette } from '../constants/projectData';
 import { Helmet } from "react-helmet-async";
+import { FiArrowLeft, FiArrowRight, FiCheck } from "react-icons/fi";
+
+const MotionDiv = motion.div;
 
 const services = [
     "produksi video",
@@ -125,12 +127,7 @@ const PricingPage = () => {
     };
 
     return (
-        <div
-            className="text-white min-h-screen p-8 font-sans"
-            style={{
-                background: `linear-gradient(to bottom, ${colorPalette.lightTeal}, ${colorPalette.orangeYellow}, ${colorPalette.salmon}, ${colorPalette.white} 70%)`,
-            }}
-        >
+        <div className="min-h-screen bg-[#f5f21f] px-5 py-6 text-black sm:px-8 lg:px-12">
             <Helmet>
                 <title>Pricing - Namlapan Studios</title>
                 <meta name="description" content="Find the perfect pricing plan for your video production, editing, documentation, or photo session needs." />
@@ -144,90 +141,102 @@ const PricingPage = () => {
                 <meta property="twitter:description" content="Find the perfect pricing plan for your video production, editing, documentation, or photo session needs." />
                 <meta property="twitter:image" content="https://namlapan.studio/og-image.png" />
             </Helmet>
-            <div className="text-center mb-12">
-                <h1 className="text-4xl font-bold mb-8 font-dm-serif text-shadow-md text-black">Harga sederhana dan transparan</h1>
+            <header className="mx-auto flex max-w-screen-2xl items-center justify-between border border-black bg-black px-4 py-3 text-[#f5f21f]">
+                <a href="/" className="inline-flex items-center gap-3 font-cal-sans text-xs uppercase tracking-[0.22em] text-[#f5f21f]/78 transition hover:text-white">
+                    <FiArrowLeft />
+                    Home
+                </a>
+                <a href="/" aria-label="Namlapan Studios home" className="flex h-11 w-11 overflow-hidden bg-[#f5f21f]">
+                    <img src="/namlapan-favicon.svg" alt="" className="h-full w-full object-cover" />
+                </a>
+            </header>
+
+            <main className="mx-auto max-w-screen-2xl py-14 sm:py-20">
+                <div className="mb-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+                    <div>
+                        <p className="font-cal-sans text-sm uppercase tracking-[0.3em] text-black/58">Production menu</p>
+                        <h1 className="mt-5 max-w-4xl font-dm-serif text-[clamp(3rem,7vw,7rem)] leading-[0.86]">
+                            Harga yang jelas untuk ide yang masih liar.
+                        </h1>
+                    </div>
+                    <p className="max-w-2xl font-cal-sans text-lg leading-8 text-black/64 lg:justify-self-end">
+                        Pilih layanan utama dulu. Detail scope, jadwal, dan kebutuhan talent bisa kita rapikan bareng setelah brief awal.
+                    </p>
+                </div>
 
                 <div
-                    className="inline-grid md:grid-cols-4 grid-cols-2 flex-wrap p-2 items-center justify-center rounded-lg gap-2 font-cal-sans tracking-wide"
-                    style={{ backgroundColor: colorPalette.darkTeal }}
+                    className="mb-10 grid grid-cols-2 gap-2 border border-black bg-black p-2 font-cal-sans tracking-wide md:grid-cols-4"
                 >
                     {services.map((service) => (
                         <button
                             key={service}
                             onClick={() => setSelectedService(service)}
-                            className={`px-4 py-2 text-sm font-medium rounded-md transition-colors capitalize ${selectedService === service
-                                ? "text-black"
-                                : "text-white/70 hover:bg-black/20"
+                            className={`px-4 py-3 text-sm font-medium capitalize transition-colors ${selectedService === service
+                                ? "bg-[#f5f21f] text-black"
+                                : "text-[#f5f21f]/62 hover:bg-[#f5f21f]/10 hover:text-[#f5f21f]"
                                 }`}
-                            style={{
-                                backgroundColor: selectedService === service ? colorPalette.orangeYellow : 'transparent'
-                            }}
                         >
                             {service}
                         </button>
                     ))}
                 </div>
-            </div>
+                <p className="mb-8 max-w-2xl border-l border-black pl-5 font-cal-sans text-base leading-7 text-black/64">
+                    {servicesDescriptions[selectedService]}
+                </p>
 
-            <motion.div
-                key={selectedService}
-                className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto font-cal-sans tracking-wide"
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-            >
-                {pricingData[selectedService].map((card, index) => (
-                    <motion.div
-                        key={index}
-                        className={`rounded-2xl p-8 flex flex-col relative shadow-lg ${card.popular ? "border-2" : ""}`}
-                        style={{
-                            backgroundColor: colorPalette.white,
-                            color: colorPalette.black,
-                            borderColor: card.popular ? colorPalette.salmon : 'transparent'
-                        }}
-                        variants={cardVariants}
-                    >
-                        {card.popular && (
-                            <div
-                                className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 text-white text-xs font-bold px-3 py-1 rounded-full"
-                                style={{ backgroundColor: colorPalette.salmon }}
-                            >
-                                Most Popular
-                            </div>
-                        )}
-                        <h3 className="text-2xl font-bold mb-2">{card.name}</h3>
-                        <p className="text-3xl font-extrabold mb-2">{card.price}<span className="text-lg font-medium opacity-50">/proyek</span></p>
-                        <ul className="space-y-4 mb-8 flex-grow">
-                            {card.features.map((feature, i) => (
-                                <li key={i} className="flex items-center">
-                                    <svg aria-hidden="true" className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style={{ color: colorPalette.lightTeal }}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    {feature}
-                                </li>
-                            ))}
-                        </ul>
-                        {/* Replace the button with an anchor tag */}
-                        <a
-                            href={getWhatsAppLink(selectedService, card.name)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full py-3 rounded-lg font-semibold transition-colors text-white text-center block"
-                            style={{
-                                backgroundColor: card.popular ? colorPalette.salmon : colorPalette.darkTeal,
-                            }}
-                            onMouseEnter={(e) => {
-                                e.target.style.backgroundColor = card.popular ? colorPalette.orangeYellow : colorPalette.lightTeal;
-                            }}
-                            onMouseLeave={(e) => {
-                                e.target.style.backgroundColor = card.popular ? colorPalette.salmon : colorPalette.darkTeal;
-                            }}
+                <MotionDiv
+                    key={selectedService}
+                    className="grid grid-cols-1 gap-4 font-cal-sans tracking-wide md:grid-cols-3"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                >
+                    {pricingData[selectedService].map((card, index) => (
+                        <MotionDiv
+                            key={index}
+                            className={`relative flex min-h-[520px] flex-col border p-6 shadow-2xl shadow-black/10 sm:p-8 ${card.popular ? "border-black bg-black text-[#f5f21f]" : "border-black bg-[#f5f21f] text-black"}`}
+                            variants={cardVariants}
                         >
-                            Mulai
-                        </a>
-                    </motion.div>
-                ))}
-            </motion.div>
+                            {card.popular && (
+                                <div className="absolute right-5 top-5 bg-[#f5f21f] px-3 py-2 text-xs font-bold uppercase tracking-[0.22em] text-black">
+                                    Populer
+                                </div>
+                            )}
+                            <div>
+                                <p className={`text-xs uppercase tracking-[0.24em] ${card.popular ? "text-[#f5f21f]/52" : "text-black/42"}`}>
+                                    0{index + 1}
+                                </p>
+                                <h3 className="mt-8 font-dm-serif text-4xl leading-none">{card.name}</h3>
+                                <p className="mt-5 text-3xl font-bold">
+                                    {card.price}
+                                    <span className={`block text-base font-medium ${card.popular ? "text-[#f5f21f]/52" : "text-black/42"}`}>
+                                        per project
+                                    </span>
+                                </p>
+                            </div>
+
+                            <ul className="my-8 flex-grow space-y-4">
+                                {card.features.map((feature, i) => (
+                                    <li key={i} className="flex items-start gap-3 leading-7">
+                                        <FiCheck className={`mt-1 shrink-0 ${card.popular ? "text-[#f5f21f]" : "text-black"}`} />
+                                        <span>{feature}</span>
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <a
+                                href={getWhatsAppLink(selectedService, card.name)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`inline-flex w-full items-center justify-center gap-3 border px-5 py-4 text-sm font-semibold uppercase tracking-[0.18em] transition ${card.popular ? "border-[#f5f21f] bg-[#f5f21f] text-black hover:bg-white" : "border-black bg-black text-[#f5f21f] hover:bg-white hover:text-black"}`}
+                            >
+                                Mulai
+                                <FiArrowRight />
+                            </a>
+                        </MotionDiv>
+                    ))}
+                </MotionDiv>
+            </main>
         </div>
     );
 };

@@ -23,7 +23,21 @@
 
 body {
   margin: 0;
-  @apply bg-[#FAFAFA]
+  color: #151515;
+  @apply bg-[#151515];
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: #e9ff5f;
+  color: #151515;
 }
 
 @keyframes blob {
@@ -55,5 +69,32 @@ body {
 
   .animation-delay-4000 {
     animation-delay: 4s;
+  }
+}
+
+@layer components {
+  .form-control {
+    width: 100%;
+    border: 1px solid rgb(255 255 255 / 0.12);
+    background: rgb(255 255 255 / 0.08);
+    padding: 0.9rem 1rem;
+    font-family: var(--font-cal-sans);
+    color: white;
+    outline: none;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+
+  .form-control::placeholder {
+    color: rgb(255 255 255 / 0.34);
+  }
+
+  .form-control:focus {
+    border-color: #e9ff5f;
+    background: rgb(255 255 255 / 0.12);
+  }
+
+  .form-control option {
+    background: #151515;
+    color: white;
   }
 }
