@@ -7,7 +7,6 @@ import { MotionConfig } from 'framer-motion';
 import { LoadingScreen } from './components/LoadingScreen';
 import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { colorPalette } from './constants/projectData';
 import { Helmet } from 'react-helmet-async';
 
 const SECTION_IDS = ['hero', 'projects', 'about', 'contact'];
@@ -133,7 +132,7 @@ export default function App() {
           camera={{ position: [0, 2, 8], fov: 42 }}
           gl={{ alpha: true }}
           style={{
-            background: `linear-gradient(to bottom, ${colorPalette.lightTeal}, ${colorPalette.orangeYellow}, ${colorPalette.salmon}, ${colorPalette.white} 70%)`,
+            background: 'linear-gradient(115deg, #f7f421 0%, #ece819 52%, #d9d214 100%)',
             position: 'fixed',
             top: 0,
             left: 0,

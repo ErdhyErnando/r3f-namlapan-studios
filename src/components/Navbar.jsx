@@ -1,7 +1,13 @@
-import { BsInstagram } from "react-icons/bs";
+import { BsInstagram, BsWhatsapp } from "react-icons/bs";
 import { IoLogoTiktok } from "react-icons/io5";
 import { HiOutlineMailOpen } from "react-icons/hi";
-import { BsWhatsapp } from "react-icons/bs";
+import { FiMenu, FiX } from "react-icons/fi";
+
+const navItems = [
+  { label: "Work", target: "projects" },
+  { label: "Studio", target: "about" },
+  { label: "Contact", target: "contact" },
+];
 
 export const Navbar = (props) => {
   const { scrollToSection, menuOpened, setMenuOpened } = props;
@@ -13,63 +19,98 @@ export const Navbar = (props) => {
 
   return (
     <>
-      <button
-        onClick={() => setMenuOpened(!menuOpened)}
-        aria-label="Toggle Menu"
-        className="z-20 fixed top-12 right-12 p-3 bg-yellow-500 w-11 h-11 rounded-md cursor-pointer">
-        <div className={`bg-black h-0.5 rounded-md w-full transition-all ${menuOpened ? "rotate-45 translate-y-0.5" : ""
-          }`} />
-        <div
-          className={`bg-black h-0.5 rounded-md w-full my-1 ${menuOpened ? "hidden" : ""
-            }`}
-        />
-        <div className={`bg-black h-0.5 rounded-md w-full transition-all ${menuOpened ? "-rotate-45" : ""}`} />
-      </button>
-      <div className={`z-10 fixed top-0 right-0 bottom-0 bg-[#fafafa] transition-all border-dotted overflow-hidden flex flex-col ${menuOpened ? "w-80" : "w-0"}`}>
-        <div className="flex-1 flex items-start justify-center flex-col gap-6 p-8">
-          <NavbarButton label="Hero" onClick={() => handleNavigate('hero')} />
-          <NavbarButton label="Projects" onClick={() => handleNavigate('projects')} />
-          <NavbarButton label="About" onClick={() => handleNavigate('about')} />
-          <NavbarButton label="Contact" onClick={() => handleNavigate('contact')} />
-          <a href="/pricing" className="text-2xl font-bold cursor-pointer hover:text-yellow-600 transition-colors font-dm-serif tracking-wide">
-            Pricing
-          </a>
-          <div className="grid grid-cols-2 items-start gap-4 mt-6 w-full">
-            <div>
-              <h3 className="text-base my-2">Follow Us!</h3>
-              <div className="flex gap-2">
-                <a href="https://www.instagram.com/namlapanstudios/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                  <BsInstagram className="text-3xl  cursor-pointer hover:text-yellow-600 transition-colors" />
-                </a>
-                <a href="https://www.tiktok.com/@namlapanstudios" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-                  <IoLogoTiktok className="text-3xl cursor-pointer hover:text-yellow-600 transition-colors" />
-                </a>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-base my-2">Contact Us!</h3>
-              <div className="flex gap-2">
-                <a href="mailto:namlapanstudios@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email">
-                  <HiOutlineMailOpen className="text-3xl  cursor-pointer hover:text-yellow-600 transition-colors" />
-                </a>
-                <a href="https://wa.me/+628568991707" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                  <BsWhatsapp className="text-3xl  cursor-pointer hover:text-yellow-600 transition-colors" />
-                </a>
-              </div>
+      <header className="fixed left-0 right-0 top-0 z-20 px-5 pt-3 sm:px-8 lg:px-12">
+        <nav className="flex w-full items-center justify-between border border-white/12 bg-[#101114]/72 px-4 py-3 text-white backdrop-blur-xl">
+          <button
+            onClick={() => handleNavigate("hero")}
+            className="flex h-11 w-11 items-center justify-center overflow-hidden bg-[#f5f21f]"
+            aria-label="Namlapan Studios home"
+          >
+            <img src="/namlapan-favicon.svg" alt="" className="h-full w-full object-cover" />
+          </button>
+
+          <div className="hidden items-center gap-7 font-cal-sans text-xs uppercase tracking-[0.22em] text-white/68 md:flex">
+            {navItems.map((item) => (
+              <button
+                key={item.target}
+                onClick={() => handleNavigate(item.target)}
+                className="transition hover:text-[#e9ff5f]"
+              >
+                {item.label}
+              </button>
+            ))}
+            <a href="/pricing" className="transition hover:text-[#e9ff5f]">
+              Pricing
+            </a>
+          </div>
+
+          <button
+            onClick={() => setMenuOpened(!menuOpened)}
+            aria-label="Toggle menu"
+            className="flex h-10 w-10 items-center justify-center border border-white/14 bg-white/8 text-xl transition hover:border-[#e9ff5f] hover:text-[#e9ff5f] md:hidden"
+          >
+            {menuOpened ? <FiX /> : <FiMenu />}
+          </button>
+        </nav>
+      </header>
+
+      <aside
+        className={`fixed inset-y-0 right-0 z-10 w-full max-w-sm border-l border-white/12 bg-[#101114] px-8 pb-8 pt-28 text-white transition-transform duration-300 md:hidden ${
+          menuOpened ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex h-full flex-col justify-between">
+          <div className="grid gap-5">
+            <NavbarButton label="Home" onClick={() => handleNavigate("hero")} />
+            {navItems.map((item) => (
+              <NavbarButton key={item.target} label={item.label} onClick={() => handleNavigate(item.target)} />
+            ))}
+            <a href="/pricing" className="font-dm-serif text-5xl leading-none transition hover:text-[#e9ff5f]">
+              Pricing
+            </a>
+          </div>
+
+          <div>
+            <p className="font-cal-sans text-xs uppercase tracking-[0.26em] text-white/42">Follow and contact</p>
+            <div className="mt-4 flex gap-3">
+              <SocialLink href="https://www.instagram.com/namlapanstudios/" label="Instagram">
+                <BsInstagram />
+              </SocialLink>
+              <SocialLink href="https://www.tiktok.com/@namlapanstudios" label="TikTok">
+                <IoLogoTiktok />
+              </SocialLink>
+              <SocialLink href="mailto:namlapanstudios@gmail.com" label="Email">
+                <HiOutlineMailOpen />
+              </SocialLink>
+              <SocialLink href="https://wa.me/+628568991707" label="WhatsApp">
+                <BsWhatsapp />
+              </SocialLink>
             </div>
           </div>
         </div>
-      </div>
+      </aside>
     </>
-  )
-}
+  );
+};
 
-const NavbarButton = (props) => {
-  const { label, onClick } = props;
-
+const NavbarButton = ({ label, onClick }) => {
   return (
-    <button onClick={onClick} className="text-2xl font-bold cursor-pointer hover:text-yellow-600 transition-colors font-dm-serif tracking-wide">
+    <button onClick={onClick} className="text-left font-dm-serif text-5xl leading-none transition hover:text-[#e9ff5f]">
       {label}
     </button>
-  )
-}
+  );
+};
+
+const SocialLink = ({ href, label, children }) => {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="flex h-11 w-11 items-center justify-center border border-white/14 text-2xl transition hover:border-[#e9ff5f] hover:text-[#e9ff5f]"
+    >
+      {children}
+    </a>
+  );
+};

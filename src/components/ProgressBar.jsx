@@ -1,8 +1,8 @@
 const ProgressBar = () => {
     return (
-        <div className="fixed top-0 left-0 w-full h-2 bg-gray-200 z-50">
+        <div className="fixed left-0 top-0 z-50 h-1.5 w-full bg-black/12">
             <div
-                className="progress-bar h-full bg-blue-400"
+                className="progress-bar h-full bg-black"
                 style={{ width: "0%" }}
             ></div>
         </div>
