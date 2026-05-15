@@ -101,18 +101,18 @@ const Gallery = ({ openLightbox, project }) => {
                     transition={{ duration: 0.7 }}
                 >
                     <div>
-                        <p className="font-cal-sans text-xs uppercase tracking-[0.28em] text-[#f5f21f]/70">
+                        <p className="font-cal-sans text-xs uppercase tracking-[0.28em] text-[#f5f21f]/85">
                             Project case
                         </p>
                         <h1 className="mt-6 whitespace-normal font-dm-serif text-[clamp(2.8rem,5vw,5.6rem)] leading-[0.88] text-[#f5f21f]">
                         {project.title}
                         </h1>
-                        <p className="mt-6 max-w-md whitespace-normal font-cal-sans text-lg leading-8 text-[#f5f21f]/72">
+                        <p className="mt-6 max-w-md whitespace-normal font-cal-sans text-lg leading-8 text-[#f5f21f]/85">
                             {project.details}
                         </p>
                     </div>
                     <div className="border-t border-[#f5f21f]/24 pt-5">
-                        <div className="flex items-center gap-3 font-cal-sans text-xs uppercase tracking-[0.22em] text-[#f5f21f]/78">
+                        <div className="flex items-center gap-3 font-cal-sans text-xs uppercase tracking-[0.22em] text-[#f5f21f]/90">
                             Scroll sideways
                             <FiArrowRight />
                         </div>
