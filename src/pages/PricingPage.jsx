@@ -154,12 +154,12 @@ const PricingPage = () => {
             <main className="mx-auto max-w-screen-2xl py-14 sm:py-20">
                 <div className="mb-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
                     <div>
-                        <p className="font-cal-sans text-sm uppercase tracking-[0.3em] text-black/58">Production menu</p>
+                        <p className="font-cal-sans text-sm uppercase tracking-[0.3em] text-black/80">Production menu</p>
                         <h1 className="mt-5 max-w-4xl font-dm-serif text-[clamp(3rem,7vw,7rem)] leading-[0.86]">
                             Harga yang jelas untuk ide yang masih liar.
                         </h1>
                     </div>
-                    <p className="max-w-2xl font-cal-sans text-lg leading-8 text-black/64 lg:justify-self-end">
+                    <p className="max-w-2xl font-cal-sans text-lg leading-8 text-black/80 lg:justify-self-end">
                         Pilih layanan utama dulu. Detail scope, jadwal, dan kebutuhan talent bisa kita rapikan bareng setelah brief awal.
                     </p>
                 </div>
@@ -173,14 +173,14 @@ const PricingPage = () => {
                             onClick={() => setSelectedService(service)}
                             className={`px-4 py-3 text-sm font-medium capitalize transition-colors ${selectedService === service
                                 ? "bg-[#f5f21f] text-black"
-                                : "text-[#f5f21f]/62 hover:bg-[#f5f21f]/10 hover:text-[#f5f21f]"
+                                : "text-[#f5f21f]/80 hover:bg-[#f5f21f]/10 hover:text-[#f5f21f]"
                                 }`}
                         >
                             {service}
                         </button>
                     ))}
                 </div>
-                <p className="mb-8 max-w-2xl border-l border-black pl-5 font-cal-sans text-base leading-7 text-black/64">
+                <p className="mb-8 max-w-2xl border-l border-black pl-5 font-cal-sans text-base leading-7 text-black/80">
                     {servicesDescriptions[selectedService]}
                 </p>
 
@@ -194,7 +194,7 @@ const PricingPage = () => {
                     {pricingData[selectedService].map((card, index) => (
                         <MotionDiv
                             key={index}
-                            className={`relative flex min-h-[520px] flex-col border p-6 shadow-2xl shadow-black/10 sm:p-8 ${card.popular ? "border-black bg-black text-[#f5f21f]" : "border-black bg-[#f5f21f] text-black"}`}
+                            className={`relative flex min-h-[520px] flex-col border p-6 shadow-2xl shadow-black/10 sm:p-8 ${card.popular ? "border-black bg-[#151515] text-white" : "border-black/10 bg-white text-black"}`}
                             variants={cardVariants}
                         >
                             {card.popular && (
@@ -203,13 +203,13 @@ const PricingPage = () => {
                                 </div>
                             )}
                             <div>
-                                <p className={`text-xs uppercase tracking-[0.24em] ${card.popular ? "text-[#f5f21f]/52" : "text-black/42"}`}>
+                                <p className={`text-xs uppercase tracking-[0.24em] ${card.popular ? "text-[#f5f21f]/75" : "text-black/45"}`}>
                                     0{index + 1}
                                 </p>
                                 <h3 className="mt-8 font-dm-serif text-4xl leading-none">{card.name}</h3>
                                 <p className="mt-5 text-3xl font-bold">
                                     {card.price}
-                                    <span className={`block text-base font-medium ${card.popular ? "text-[#f5f21f]/52" : "text-black/42"}`}>
+                                    <span className={`block text-base font-medium ${card.popular ? "text-[#f5f21f]/75" : "text-black/45"}`}>
                                         per project
                                     </span>
                                 </p>
@@ -218,7 +218,7 @@ const PricingPage = () => {
                             <ul className="my-8 flex-grow space-y-4">
                                 {card.features.map((feature, i) => (
                                     <li key={i} className="flex items-start gap-3 leading-7">
-                                        <FiCheck className={`mt-1 shrink-0 ${card.popular ? "text-[#f5f21f]" : "text-black"}`} />
+                                        <FiCheck className={`mt-1 shrink-0 ${card.popular ? "text-[#f5f21f]" : "text-[#151515]"}`} />
                                         <span>{feature}</span>
                                     </li>
                                 ))}
@@ -228,7 +228,7 @@ const PricingPage = () => {
                                 href={getWhatsAppLink(selectedService, card.name)}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className={`inline-flex w-full items-center justify-center gap-3 border px-5 py-4 text-sm font-semibold uppercase tracking-[0.18em] transition ${card.popular ? "border-[#f5f21f] bg-[#f5f21f] text-black hover:bg-white" : "border-black bg-black text-[#f5f21f] hover:bg-white hover:text-black"}`}
+                                className={`inline-flex w-full items-center justify-center gap-3 border px-5 py-4 text-sm font-semibold uppercase tracking-[0.18em] transition ${card.popular ? "border-[#f5f21f] bg-[#f5f21f] text-black hover:bg-white" : "border-black bg-black text-[#f5f21f] hover:bg-[#151515] hover:text-white"}`}
                             >
                                 Mulai
                                 <FiArrowRight />
