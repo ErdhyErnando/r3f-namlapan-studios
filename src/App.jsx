@@ -9,6 +9,45 @@ import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Helmet } from '@dr.pogodin/react-helmet';
 
+// Branded toast surface — matches the dark contact panel (#151515) and the
+// accent palette used across the site. Sharp corners and a left accent bar
+// instead of the library default rounded white card.
+const TOAST_BASE_STYLE = {
+  background: '#151515',
+  color: '#f4efe6',
+  border: '1px solid rgba(244, 239, 230, 0.14)',
+  borderLeft: '3px solid #e9ff5f',
+  borderRadius: '0px',
+  padding: '14px 18px 14px 16px',
+  fontFamily: 'var(--font-cal-sans), sans-serif',
+  fontSize: '0.875rem',
+  lineHeight: '1.45',
+  letterSpacing: '0.01em',
+  maxWidth: '26rem',
+  boxShadow: '0 24px 48px -24px rgba(5, 5, 5, 0.9)',
+};
+
+const TOASTER_OPTIONS = {
+  duration: 5000,
+  style: TOAST_BASE_STYLE,
+  success: {
+    style: { borderLeftColor: '#e9ff5f' },
+    iconTheme: { primary: '#e9ff5f', secondary: '#151515' },
+  },
+  error: {
+    style: { borderLeftColor: '#f6935a' },
+    iconTheme: { primary: '#f6935a', secondary: '#151515' },
+  },
+  loading: {
+    style: { borderLeftColor: '#f5f21f' },
+    iconTheme: { primary: '#f5f21f', secondary: '#151515' },
+  },
+};
+
+// The site header is `fixed top-0 pt-3` with a 70px nav (≈82px tall), so the
+// default 16px inset would drop the toast straight onto the nav links.
+const TOASTER_CONTAINER_STYLE = { top: '6.5rem', right: '1.5rem' };
+
 const SECTION_IDS = ['hero', 'projects', 'about', 'contact'];
 
 export default function App() {
@@ -129,7 +168,13 @@ export default function App() {
         </script>
       </Helmet>
       <LoadingScreen started={started} setStarted={setStarted} />
-      <Toaster position='top-right' reverseOrder={false} />
+      <Toaster
+        position='top-right'
+        reverseOrder={false}
+        gutter={12}
+        toastOptions={TOASTER_OPTIONS}
+        containerStyle={TOASTER_CONTAINER_STYLE}
+      />
       <MotionConfig transition={{ type: 'spring', mass: 5, stiffness: 500, damping: 50, restDelta: 0.0001 }}>
         <Canvas
           shadows

@@ -257,23 +257,14 @@ const ContactSection = ({ sectionRef }) => {
     // handler returns, and the reset has to happen after the request resolves.
     const form = event.currentTarget;
 
-    const toastStyle = {
-      borderRadius: "8px",
-      background: "#fff",
-      color: "#000",
-    };
+    // One toast id: the loading toast is replaced in place by the result, so
+    // "Mengirim..." no longer lingers next to the outcome.
+    const toastId = "contact-form";
 
-    toast("Mengirim...", {
-      style: {
-        background: "#fff",
-        color: "#000",
-      },
-    });
+    toast.loading("Mengirim...", { id: toastId });
 
     const showFailure = () =>
-      toast.error("Gagal mengirim pesan. Silakan coba lagi nanti.", {
-        style: toastStyle,
-      });
+      toast.error("Gagal mengirim pesan. Silakan coba lagi nanti.", { id: toastId });
 
     try {
       const formData = new FormData(form);
@@ -301,10 +292,7 @@ const ContactSection = ({ sectionRef }) => {
         return;
       }
 
-      toast("Pesan Anda telah kami terima!", {
-        icon: "OK",
-        style: toastStyle,
-      });
+      toast.success("Pesan Anda telah kami terima!", { id: toastId });
       form.reset();
     } catch (error) {
       // Network failure, offline, CORS, or a dropped request.
