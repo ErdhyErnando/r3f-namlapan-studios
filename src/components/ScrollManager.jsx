@@ -2,6 +2,7 @@ import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { useReducedMotion } from "framer-motion";
 
 export const ScrollManager = (props) => {
   const { section, onSectionChange } = props;
@@ -9,6 +10,7 @@ export const ScrollManager = (props) => {
   const data = useScroll();
   const lastScroll = useRef(0);
   const isAnimating = useRef(false);
+  const prefersReducedMotion = useReducedMotion();
 
   // Styling the scroll fill is a DOM side effect, so it belongs in an effect —
   // running it in the component body mutated a drei-owned node during render,
@@ -20,7 +22,9 @@ export const ScrollManager = (props) => {
 
   useEffect(() => {
     const tween = gsap.to(data.el, {
-      duration: 0.9,
+      // A 0.9 s scroll animation is exactly what reduced-motion users are
+      // asking not to see, so jump straight to the section instead.
+      duration: prefersReducedMotion ? 0 : 0.9,
       scrollTop: section * data.el.clientHeight,
       onStart: () => {
         isAnimating.current = true;
@@ -31,7 +35,7 @@ export const ScrollManager = (props) => {
     });
 
     return () => tween.kill();
-  }, [section, data.el]);
+  }, [section, data.el, prefersReducedMotion]);
 
   useFrame(() => {
     if (isAnimating.current) {

@@ -1,10 +1,10 @@
-import { motion } from "framer-motion";
+import * as m from "framer-motion/m";
 import { FiArrowUpRight, FiPlay } from "react-icons/fi";
 import { allProjectsData } from "../constants/projectData";
 
-const MotionDiv = motion.div;
-const MotionP = motion.p;
-const MotionA = motion.a;
+const MotionDiv = m.div;
+const MotionP = m.p;
+const MotionA = m.a;
 
 const Projects = () => {
   const [featuredProject, ...supportingProjects] = allProjectsData;

@@ -1,50 +1,107 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "framer-motion";
+
+// Keep in sync with the transition durations in the class names below.
+const FADE_IN_MS = 50;
+const FADE_OUT_MS = 500;
 
 const Lightbox = ({ currentImage, closeLightBox }) => {
     const [showContent, setShowContent] = useState(false);
+    const closeButtonRef = useRef(null);
+    const restoreFocusRef = useRef(null);
+    const prefersReducedMotion = useReducedMotion();
+    const fadeOutMs = prefersReducedMotion ? 0 : FADE_OUT_MS;
 
     useEffect(() => {
-        // Trigger fade-in after a brief moment to allow initial styles to apply
         const timer = setTimeout(() => {
             setShowContent(true);
-        }, 50); // Small delay like 50ms
+        }, FADE_IN_MS);
 
         return () => clearTimeout(timer);
     }, []);
 
+    // Move focus into the dialog, and put it back where it was on close —
+    // previously the overlay was a <div> with an onClick, so opening it
+    // stranded keyboard and screen-reader users on an unreachable control.
+    useEffect(() => {
+        restoreFocusRef.current = document.activeElement;
+        closeButtonRef.current?.focus();
+
+        return () => {
+            const previous = restoreFocusRef.current;
+            if (previous instanceof HTMLElement && previous.isConnected) {
+                previous.focus();
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === "Escape") {
+                event.stopPropagation();
+                closeLightBox();
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [closeLightBox]);
+
     const handleClose = () => {
-        setShowContent(false); // Start fade-out animation
+        setShowContent(false);
+
+        if (fadeOutMs === 0) {
+            closeLightBox();
+            return;
+        }
+
         setTimeout(() => {
-            closeLightBox(); // Call the actual close function after animation
-        }, 500); // Match this duration with CSS transition duration
+            closeLightBox();
+        }, fadeOutMs);
     };
 
     return (
         <div
-            className={`fixed inset-0 flex items-center justify-center bg-black z-50 transition-all duration-500 ease-in-out ${showContent
+            role="dialog"
+            aria-modal="true"
+            aria-label="Image viewer"
+            className={`fixed inset-0 flex items-center justify-center bg-black z-50 transition-opacity duration-500 ease-in-out ${showContent
                     ? "bg-opacity-80 opacity-100"
                     : "bg-opacity-0 opacity-0 pointer-events-none"
                 }`}
-            onClick={handleClose} // Close when clicking on the backdrop
         >
-            <span
-                className={`absolute top-5 right-5 text-white text-4xl cursor-pointer transition-opacity duration-500 ease-in-out ${showContent ? "opacity-100" : "opacity-0"
+            {/*
+              Full-bleed backdrop. A real <button> so it is announced and
+              operable, but removed from the tab order — the visible close
+              control and Escape are the keyboard paths.
+            */}
+            <button
+                type="button"
+                aria-label="Close image viewer"
+                tabIndex={-1}
+                onClick={handleClose}
+                className="absolute inset-0 h-full w-full cursor-default"
+            />
+
+            <button
+                ref={closeButtonRef}
+                type="button"
+                aria-label="Close image viewer"
+                onClick={handleClose}
+                className={`absolute top-5 right-5 z-10 flex h-12 w-12 items-center justify-center text-4xl leading-none text-white transition-opacity duration-500 ease-in-out hover:text-[#f5f21f] ${showContent ? "opacity-100" : "opacity-0"
                     }`}
-                onClick={(e) => {
-                    e.stopPropagation(); // Prevent backdrop click when clicking button
-                    handleClose();
-                }}
             >
-                &times;
-            </span>
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+            {/* Decorative: the image the user just activated, shown full size. */}
             <img
                 src={currentImage}
-                alt="Lightbox Image"
-                className={`object-contain transition-all duration-300 ease-in-out ${showContent
+                alt=""
+                className={`relative z-0 object-contain transition-all duration-300 ease-in-out ${showContent
                         ? "max-w-[90vw] max-h-[90vh] opacity-100 scale-100"
                         : "max-w-[80vw] max-h-[80vh] opacity-0 scale-95"
                     }`}
-                onClick={(e) => e.stopPropagation()} // Prevent backdrop click when clicking image
             />
         </div>
     );
