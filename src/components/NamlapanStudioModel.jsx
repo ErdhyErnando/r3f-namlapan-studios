@@ -2,6 +2,7 @@ import { Float, Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef, useState } from "react";
 import { MathUtils } from "three";
+import { useReducedMotion } from "framer-motion";
 
 const black = "#050505";
 const charcoal = "#0b0b0a";
@@ -15,15 +16,25 @@ const SCALE_DAMPING = 5;
 export const NamlapanStudioModel = (props) => {
   const rigRef = useRef();
   const [hovered, setHovered] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   useFrame((state, delta) => {
     if (!rigRef.current) {
       return;
     }
 
-    rigRef.current.rotation.y += delta * (hovered ? 0.26 : 0.08);
     const targetScale = hovered ? 1.02 : 1;
     const { scale } = rigRef.current;
+
+    if (prefersReducedMotion) {
+      // No idle spin, no floating bob, no scale spring — just the end state.
+      rigRef.current.rotation.y = 0;
+      rigRef.current.position.y = 0;
+      scale.setScalar(targetScale);
+      return;
+    }
+
+    rigRef.current.rotation.y += delta * (hovered ? 0.26 : 0.08);
     scale.x = MathUtils.damp(scale.x, targetScale, SCALE_DAMPING, delta);
     scale.y = MathUtils.damp(scale.y, targetScale, SCALE_DAMPING, delta);
     scale.z = MathUtils.damp(scale.z, targetScale, SCALE_DAMPING, delta);

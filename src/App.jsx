@@ -2,7 +2,7 @@ import { Canvas } from '@react-three/fiber';
 import { Experience } from './components/Experience';
 import { Interface } from './components/Interface';
 import { Navbar } from './components/Navbar';
-import { useState, useEffect, useMemo, useRef, createRef } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { MotionConfig } from 'framer-motion';
 import { LoadingScreen } from './components/LoadingScreen';
 import { Suspense } from 'react';
@@ -16,12 +16,16 @@ export default function App() {
   const [started, setStarted] = useState(false);
   const [menuOpened, setMenuOpened] = useState(false);
   const [isExploring, setIsExploring] = useState(false);
-  const sectionRefs = useMemo(() => ({
-    hero: createRef(),
-    projects: createRef(),
-    about: createRef(),
-    contact: createRef(),
-  }), []);
+  const heroRef = useRef(null);
+  const projectsRef = useRef(null);
+  const aboutRef = useRef(null);
+  const contactRef = useRef(null);
+  // Ref identities are stable, so this object stays stable too — the
+  // IntersectionObserver effect below depends on it.
+  const sectionRefs = useMemo(
+    () => ({ hero: heroRef, projects: projectsRef, about: aboutRef, contact: contactRef }),
+    [],
+  );
   const currentSectionRef = useRef(section);
 
   useEffect(() => {

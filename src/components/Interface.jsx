@@ -1,14 +1,14 @@
 import { forwardRef } from "react";
-import { motion } from "framer-motion";
+import * as m from "framer-motion/m";
 import Projects from "./Projects";
 import toast from "react-hot-toast";
 import { HiOutlineMailOpen } from "react-icons/hi";
 import { BsWhatsapp } from "react-icons/bs";
 import { FiArrowDown, FiArrowRight, FiCamera, FiFilm, FiPlay, FiSend } from "react-icons/fi";
 
-const MotionSection = motion.section;
-const MotionDiv = motion.div;
-const MotionAside = motion.aside;
+const MotionSection = m.section;
+const MotionDiv = m.div;
+const MotionAside = m.aside;
 
 const studioStats = [
   { value: "30+", label: "project visual" },

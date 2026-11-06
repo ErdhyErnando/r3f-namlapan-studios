@@ -1,9 +1,9 @@
 import { useEffect, useRef, useMemo } from "react";
-import { motion } from "framer-motion";
+import * as m from "framer-motion/m";
 import { FiArrowRight, FiMaximize2, FiPlay } from "react-icons/fi";
 
-const MotionDiv = motion.div;
-const MotionButton = motion.button;
+const MotionDiv = m.div;
+const MotionButton = m.button;
 
 const Gallery = ({ openLightbox, project, progressRef }) => {
     const galleryContainerRef = useRef(null);
@@ -141,7 +141,7 @@ const Gallery = ({ openLightbox, project, progressRef }) => {
                             >
                                 <img
                                     src={item.src}
-                                    alt={`Gallery Image ${index + 1}`}
+                                    alt={`${project.title ?? project.clientName} — still ${index + 1}`}
                                     className="h-full w-full object-cover opacity-95 transition duration-700 group-hover:scale-105 group-hover:opacity-100"
                                 />
                                 <div className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center bg-[#f5f21f] text-black opacity-0 transition group-hover:opacity-100">

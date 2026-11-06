@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { motion } from 'framer-motion';
+import * as m from 'framer-motion/m';
 import { Helmet } from '@dr.pogodin/react-helmet';
 import { FiArrowLeft, FiArrowRight, FiCheck } from "react-icons/fi";
 
-const MotionDiv = motion.div;
+const MotionDiv = m.div;
 
 const services = [
     "produksi video",
