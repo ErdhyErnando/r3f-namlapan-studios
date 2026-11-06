@@ -1,11 +1,11 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router';
 import { useState } from 'react';
 import BackButton from '../components/BackButton';
 import ProgressBar from '../components/ProgressBar';
 import Gallery from '../components/Gallery';
 import Lightbox from '../components/Lightbox';
 import { allProjectsData } from '../constants/projectData';
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from '@dr.pogodin/react-helmet';
 
 const ClientProjectPage = () => {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
