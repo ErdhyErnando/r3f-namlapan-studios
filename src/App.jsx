@@ -7,7 +7,7 @@ import { MotionConfig } from 'framer-motion';
 import { LoadingScreen } from './components/LoadingScreen';
 import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from '@dr.pogodin/react-helmet';
 
 const SECTION_IDS = ['hero', 'projects', 'about', 'contact'];
 
