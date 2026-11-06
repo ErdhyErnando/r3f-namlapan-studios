@@ -10,6 +10,16 @@
 }
 
 @theme {
+  /*
+   * Pinned deliberately: tailwindcss 4.3 changed its default `--font-sans` from
+   * `ui-sans-serif, system-ui, …` to the classic `-apple-system, BlinkMacSystemFont,
+   * "Segoe UI", Roboto, …` stack. Body text here has no explicit font-family, so
+   * that default is what renders. Pinning the previous value keeps this Vite 8
+   * upgrade from silently changing typography. Delete this line to adopt
+   * Tailwind's new default.
+   */
+  --font-sans: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
   --font-dm-serif: 'DM Serif Display', serif;
   --font-baskerville: 'Baskervville', serif;
   --font-pt-serif: 'PT Serif', serif;
