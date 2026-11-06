@@ -4,21 +4,19 @@ import { useEffect } from "react";
 
 export const LoadingScreen = (props) => {
     const { started, setStarted } = props;
-    const { progress, total, loaded, item } = useProgress();
+    const { progress } = useProgress();
 
+    // One timer, one cleanup. The previous version cleared only the 1400 ms
+    // fallback and left the 500 ms completion timer running past unmount, and
+    // its dependency list included `item`, which changes for every loaded
+    // asset — so it re-armed the fallback on every progress tick.
     useEffect(() => {
-        const fallbackTimer = setTimeout(() => {
+        const timer = setTimeout(() => {
             setStarted(true);
-        }, 1400);
+        }, progress === 100 ? 500 : 1400);
 
-        if (progress === 100) {
-            setTimeout(() => {
-                setStarted(true);
-            }, 500);
-        }
-
-        return () => clearTimeout(fallbackTimer);
-    }, [progress, total, loaded, item, setStarted]);
+        return () => clearTimeout(timer);
+    }, [progress, setStarted]);
 
     return (
         <div
@@ -26,7 +24,7 @@ export const LoadingScreen = (props) => {
         >
             <div className="text-4xl md:text-9xl font-dm-serif text-[#050505] relative">
                 <div
-                    className="absolute left-0 top-0 overflow-hidden transition-all duration-500 whitespace-nowrap"
+                    className="absolute left-0 top-0 overflow-hidden transition-[width] duration-500 whitespace-nowrap"
                     style={{
                         width: `${progress}%`,
                     }}

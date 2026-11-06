@@ -7,6 +7,11 @@ const black = "#050505";
 const charcoal = "#0b0b0a";
 const shadowBlack = "#10100d";
 
+// Frame-rate independent replacement for the old per-frame `lerp(…, 0.08)`.
+// `damp` converges by `1 - e^(-lambda * dt)`, so 5 reproduces that 0.08 factor
+// at 60 fps while staying identical at any refresh rate.
+const SCALE_DAMPING = 5;
+
 export const NamlapanStudioModel = (props) => {
   const rigRef = useRef();
   const [hovered, setHovered] = useState(false);
@@ -18,9 +23,10 @@ export const NamlapanStudioModel = (props) => {
 
     rigRef.current.rotation.y += delta * (hovered ? 0.26 : 0.08);
     const targetScale = hovered ? 1.02 : 1;
-    rigRef.current.scale.x = MathUtils.lerp(rigRef.current.scale.x, targetScale, 0.08);
-    rigRef.current.scale.y = MathUtils.lerp(rigRef.current.scale.y, targetScale, 0.08);
-    rigRef.current.scale.z = MathUtils.lerp(rigRef.current.scale.z, targetScale, 0.08);
+    const { scale } = rigRef.current;
+    scale.x = MathUtils.damp(scale.x, targetScale, SCALE_DAMPING, delta);
+    scale.y = MathUtils.damp(scale.y, targetScale, SCALE_DAMPING, delta);
+    scale.z = MathUtils.damp(scale.z, targetScale, SCALE_DAMPING, delta);
     rigRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.035;
   });
 
@@ -189,8 +195,8 @@ const Tripod = () => {
         <cylinderGeometry args={[0.05, 0.05, 1.68, 16]} />
         <meshStandardMaterial color={black} roughness={0.84} metalness={0.04} />
       </mesh>
-      {legs.map((leg, index) => (
-        <mesh key={index} position={leg.position} rotation={leg.rotation}>
+      {legs.map((leg) => (
+        <mesh key={leg.position.join(",")} position={leg.position} rotation={leg.rotation}>
           <cylinderGeometry args={[0.025, 0.025, 1.08, 12]} />
           <meshStandardMaterial color={black} roughness={0.84} metalness={0.04} />
         </mesh>
