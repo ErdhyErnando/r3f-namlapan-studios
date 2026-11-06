@@ -50,3 +50,12 @@ version and source model — keep it accurate if you bump the version.
 ## Deployment
 Make sure to set the `VITE_MODEL_URL` environment variable in your deployment platform (Vercel, Netlify, etc.) pointing to your R2 bucket URL.
 
+Node **^20.19.0 || >=22.12.0** is required (Vite 8), enforced via the `engines` field.
+
+`pnpm build` runs `vite build` and then `scripts/gen-seo-files.mjs`, which writes
+`dist/sitemap.xml` (static routes plus every project page, derived from
+`src/constants/projectData.js`) and copies `.robots.production.txt` to
+`dist/robots.txt`. Both files therefore depend on `.robots.production.txt` and
+`projectData.js` being present at build time. Regenerate them alone with
+`pnpm build:seo`.
+

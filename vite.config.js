@@ -1,16 +1,15 @@
 import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
-import sitemap from 'vite-plugin-sitemap'
-import { robots } from 'vite-plugin-robots';
+
+// sitemap.xml and robots.txt are emitted by scripts/gen-seo-files.mjs after the
+// build — see that file for why the old Vite plugins were dropped.
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    sitemap({ hostname: 'https://namlapan.studio' }),
-    robots(),
   ],
   server: {
     host: true,
