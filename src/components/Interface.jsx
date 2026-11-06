@@ -253,42 +253,63 @@ const AboutSection = ({ sectionRef }) => {
 const ContactSection = ({ sectionRef }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
+    // Capture the form before awaiting — `event.currentTarget` is null once the
+    // handler returns, and the reset has to happen after the request resolves.
+    const form = event.currentTarget;
+
+    const toastStyle = {
+      borderRadius: "8px",
+      background: "#fff",
+      color: "#000",
+    };
+
     toast("Mengirim...", {
       style: {
         background: "#fff",
         color: "#000",
       },
     });
-    const formData = new FormData(event.target);
 
-    formData.append("access_key", import.meta.env.VITE_WEB_ACCESS_TOKEN);
+    const showFailure = () =>
+      toast.error("Gagal mengirim pesan. Silakan coba lagi nanti.", {
+        style: toastStyle,
+      });
 
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData,
-    });
+    try {
+      const formData = new FormData(form);
+      formData.append("access_key", import.meta.env.VITE_WEB_ACCESS_TOKEN);
 
-    const data = await response.json();
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
 
-    if (data.success) {
+      // fetch() resolves on 4xx/5xx, so the status has to be checked before the
+      // body is consumed. Without this a failed request parses an error payload
+      // as success, or throws on a non-JSON body and shows the user nothing.
+      if (!response.ok) {
+        console.error("Contact form rejected:", response.status, response.statusText);
+        showFailure();
+        return;
+      }
+
+      const data = await response.json().catch(() => null);
+
+      if (!data?.success) {
+        console.error("Contact form rejected:", data);
+        showFailure();
+        return;
+      }
+
       toast("Pesan Anda telah kami terima!", {
         icon: "OK",
-        style: {
-          borderRadius: "8px",
-          background: "#fff",
-          color: "#000",
-        },
+        style: toastStyle,
       });
-      event.target.reset();
-    } else {
-      console.log("Error:", data);
-      toast.error("Gagal mengirim pesan. Silakan coba lagi nanti.", {
-        style: {
-          borderRadius: "8px",
-          background: "#fff",
-          color: "#000",
-        },
-      });
+      form.reset();
+    } catch (error) {
+      // Network failure, offline, CORS, or a dropped request.
+      console.error("Contact form request failed:", error);
+      showFailure();
     }
   };
 
