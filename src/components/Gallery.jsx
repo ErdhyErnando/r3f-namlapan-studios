@@ -5,7 +5,7 @@ import { FiArrowRight, FiMaximize2, FiPlay } from "react-icons/fi";
 const MotionDiv = motion.div;
 const MotionButton = motion.button;
 
-const Gallery = ({ openLightbox, project }) => {
+const Gallery = ({ openLightbox, project, progressRef }) => {
     const galleryContainerRef = useRef(null);
 
     useEffect(() => {
@@ -16,9 +16,11 @@ const Gallery = ({ openLightbox, project }) => {
                     (container.scrollLeft /
                         (container.scrollWidth - container.clientWidth)) *
                     100;
-                const progressBar = document.querySelector(".progress-bar");
-                if (progressBar) {
-                    progressBar.style.width = `${scrollPercentage}%`;
+                // Was document.querySelector('.progress-bar') — reaching into a
+                // node owned by a sibling component on every scroll event.
+                // The owner now passes a ref down instead.
+                if (progressRef?.current) {
+                    progressRef.current.style.width = `${scrollPercentage}%`;
                 }
             }
         };
@@ -43,7 +45,7 @@ const Gallery = ({ openLightbox, project }) => {
                 galleryContainer.removeEventListener("wheel", handleWheel);
             }
         };
-    }, []);
+    }, [progressRef]);
 
     const images = project.gallery;
 
@@ -123,7 +125,7 @@ const Gallery = ({ openLightbox, project }) => {
                     if (item.type === "image") {
                         return (
                             <MotionButton
-                                key={index}
+                                key={`${item.type}-${item.src}`}
                                 type="button"
                                 className="group relative mr-3 flex-shrink-0 cursor-pointer overflow-hidden border border-black bg-black p-2 text-left shadow-2xl shadow-black/18"
                                 style={{
@@ -150,7 +152,7 @@ const Gallery = ({ openLightbox, project }) => {
                     } else if (item.type === "youtube") {
                         return (
                             <MotionDiv
-                                key={index}
+                                key={`${item.type}-${item.src}`}
                                 className="gallery-video relative mr-3 overflow-hidden border border-black bg-black p-2 shadow-2xl shadow-black/18"
                                 style={{
                                     height: `${item.randomHeight}vh`,

@@ -193,7 +193,7 @@ const PricingPage = () => {
                 >
                     {pricingData[selectedService].map((card, index) => (
                         <MotionDiv
-                            key={index}
+                            key={card.name}
                             className={`relative flex min-h-[520px] flex-col border p-6 shadow-2xl shadow-black/10 sm:p-8 ${card.popular ? "border-black bg-[#151515] text-white" : "border-black/10 bg-white text-black"}`}
                             variants={cardVariants}
                         >
@@ -216,8 +216,8 @@ const PricingPage = () => {
                             </div>
 
                             <ul className="my-8 flex-grow space-y-4">
-                                {card.features.map((feature, i) => (
-                                    <li key={i} className="flex items-start gap-3 leading-7">
+                                {card.features.map((feature) => (
+                                    <li key={feature} className="flex items-start gap-3 leading-7">
                                         <FiCheck className={`mt-1 shrink-0 ${card.popular ? "text-[#f5f21f]" : "text-[#151515]"}`} />
                                         <span>{feature}</span>
                                     </li>

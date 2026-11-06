@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import BackButton from '../components/BackButton';
 import ProgressBar from '../components/ProgressBar';
 import Gallery from '../components/Gallery';
@@ -10,6 +10,7 @@ import { Helmet } from '@dr.pogodin/react-helmet';
 const ClientProjectPage = () => {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [currentImage, setCurrentImage] = useState("");
+    const progressBarRef = useRef(null);
     const navigate = useNavigate();
 
     const openLightbox = (src) => {
@@ -74,8 +75,8 @@ const ClientProjectPage = () => {
             </Helmet>
             <div className='relative h-screen flex-grow overflow-hidden bg-[#f5f21f]'>
                 <BackButton />
-                <ProgressBar />
-                <Gallery openLightbox={openLightbox} project={project} />
+                <ProgressBar progressRef={progressBarRef} />
+                <Gallery openLightbox={openLightbox} project={project} progressRef={progressBarRef} />
             </div>
 
             {isLightboxOpen && (

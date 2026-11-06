@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -35,17 +35,25 @@ const fragmentShader = `
 
 export const GradientBackground3D = () => {
   const meshRef = useRef();
+  const materialRef = useRef();
 
-  const uniforms = useRef({
-    uTime: { value: 0 },
-    uColor1: { value: new THREE.Color('#57F0DE') }, // brightTurquoise
-    uColor2: { value: new THREE.Color('#6F3AA4') }, // purple
-    uColor3: { value: new THREE.Color('#4D4B88') }, // indigo
-  });
+  // The argument to useRef is evaluated on every render, so building the
+  // THREE.Color instances inline allocated three throwaway objects per render.
+  // useMemo builds them once; the mutable uniform is then driven through the
+  // material ref, which is where Three.js actually owns it.
+  const uniforms = useMemo(
+    () => ({
+      uTime: { value: 0 },
+      uColor1: { value: new THREE.Color('#57F0DE') }, // brightTurquoise
+      uColor2: { value: new THREE.Color('#6F3AA4') }, // purple
+      uColor3: { value: new THREE.Color('#4D4B88') }, // indigo
+    }),
+    [],
+  );
 
   useFrame((state) => {
-    if (meshRef.current) {
-      uniforms.current.uTime.value = state.clock.elapsedTime;
+    if (materialRef.current) {
+      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
     }
   });
 
@@ -53,7 +61,8 @@ export const GradientBackground3D = () => {
     <mesh ref={meshRef} position={[0, 0, -10]} scale={1.5}>
       <icosahedronGeometry args={[1, 1]} />
       <shaderMaterial
-        uniforms={uniforms.current}
+        ref={materialRef}
+        uniforms={uniforms}
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         transparent

@@ -1,6 +1,6 @@
 import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 export const ScrollManager = (props) => {
@@ -10,11 +10,16 @@ export const ScrollManager = (props) => {
   const lastScroll = useRef(0);
   const isAnimating = useRef(false);
 
-  data.fill.classList.add("top-0");
-  data.fill.classList.add("absolute");
+  // Styling the scroll fill is a DOM side effect, so it belongs in an effect —
+  // running it in the component body mutated a drei-owned node during render,
+  // on every render, and twice under StrictMode. useLayoutEffect keeps it
+  // before the first paint, so there is no visible flash.
+  useLayoutEffect(() => {
+    data.fill.classList.add("top-0", "absolute");
+  }, [data.fill]);
 
   useEffect(() => {
-    gsap.to(data.el, {
+    const tween = gsap.to(data.el, {
       duration: 0.9,
       scrollTop: section * data.el.clientHeight,
       onStart: () => {
@@ -22,9 +27,11 @@ export const ScrollManager = (props) => {
       },
       onComplete: () => {
         isAnimating.current = false;
-      }
-    })
-  }, [section]);
+      },
+    });
+
+    return () => tween.kill();
+  }, [section, data.el]);
 
   useFrame(() => {
     if (isAnimating.current) {
